@@ -1,0 +1,23 @@
+@import 'tailwindcss' source(none);
+@source '../**/*.{js,ts,jsx,tsx}';
+
+@import 'tw-animate-css';
+
+/* Geosciencelab Brand Color Palette */
+@theme {
+  /* Brand Colors */
+  --color-brand-navy: #24336A;
+  --color-brand-lime: #8DBF44;
+  --color-brand-white: #EEEEEE;
+  --color-brand-surface: #F4F6FA;
+  --color-brand-muted: #6B7280;
+  --color-brand-charcoal: #111827;
+  
+  /* Border Radius */
+  --radius-card: 12px;
+  --radius-button: 8px;
+  --radius-pill: 999px;
+  
+  /* Shadows */
+  --shadow-card: 0 24px 64px rgba(36, 51, 106, 0.12);
+}

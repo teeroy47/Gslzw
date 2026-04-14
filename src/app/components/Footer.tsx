@@ -1,50 +1,28 @@
-import { Diamond, MapPin, Phone, Mail } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import { companyProfile } from '../companyProfile';
+import GslLogo from './GslLogo';
 
 export default function Footer() {
   return (
     <footer className="bg-[#111827] text-white">
-      <div className="max-w-[1280px] mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Col 1 - Brand */}
+      <div className="mx-auto max-w-[1280px] px-6 py-16">
+        <div className="mb-12 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Diamond className="w-6 h-6 text-[#8DBF44] fill-[#8DBF44]" />
-              <span className="font-['Syne'] font-extrabold text-xl">Geosciencelab</span>
+            <div className="mb-4 flex items-center gap-3">
+              <GslLogo className="h-14 w-auto" compact />
             </div>
-            <p className="font-['DM_Sans'] italic text-white/50 text-sm mb-6">
-              "We maintain the standard of good, quality workmanship"
-            </p>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-xs text-white/70">
-                <div className="px-3 py-1 bg-[#8DBF44]/20 text-[#8DBF44] rounded font-['DM_Sans'] font-semibold">
-                  ISO 17025
-                </div>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-white/70">
-                <div className="px-3 py-1 bg-[#8DBF44]/20 text-[#8DBF44] rounded font-['DM_Sans'] font-semibold">
-                  SANAS Accredited
-                </div>
-              </div>
+            <p className="mb-6 text-sm italic text-white/50">"{companyProfile.motto}"</p>
+            <div className="space-y-2 text-sm text-white/65">
+              <div>{companyProfile.vision}</div>
             </div>
           </div>
 
-          {/* Col 2 - Services */}
           <div>
-            <h4 className="font-['Syne'] font-bold text-lg mb-4">Services</h4>
+            <h4 className="mb-4 font-['Syne'] text-lg font-bold">Core Services</h4>
             <ul className="space-y-3">
-              {[
-                'Geotechnical Investigations',
-                'Material Testing',
-                'Geological Surveys',
-                'Environmental Studies',
-                'Quality Assurance',
-                'Construction Monitoring'
-              ].map((service, index) => (
-                <li key={index}>
-                  <a
-                    href="#"
-                    className="font-['DM_Sans'] text-sm text-white/60 hover:text-[#8DBF44] transition-colors duration-300"
-                  >
+              {companyProfile.specialities.map((service) => (
+                <li key={service}>
+                  <a href="#services" className="text-sm text-white/60 transition-colors duration-300 hover:text-[#8DBF44]">
                     {service}
                   </a>
                 </li>
@@ -52,71 +30,47 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3 - Company */}
           <div>
-            <h4 className="font-['Syne'] font-bold text-lg mb-4">Company</h4>
-            <ul className="space-y-3">
-              {['About Us', 'Our Team', 'Careers', 'News & Updates', 'Case Studies', 'Accreditations'].map(
-                (item, index) => (
-                  <li key={index}>
-                    <a
-                      href="#"
-                      className="font-['DM_Sans'] text-sm text-white/60 hover:text-[#8DBF44] transition-colors duration-300"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                )
-              )}
+            <h4 className="mb-4 font-['Syne'] text-lg font-bold">Company</h4>
+            <ul className="space-y-3 text-sm text-white/60">
+              <li>Founded in {companyProfile.foundedYear}</li>
+              <li>Based in {companyProfile.bases.join(' and ')}</li>
+              <li>Managing Director: {companyProfile.leadership.managingDirector}</li>
+              <li>Administrator: {companyProfile.leadership.administrator}</li>
+              <li>Postal Address: {companyProfile.postalAddress.join(', ')}</li>
             </ul>
           </div>
 
-          {/* Col 4 - Contact */}
           <div>
-            <h4 className="font-['Syne'] font-bold text-lg mb-4">Contact</h4>
+            <h4 className="mb-4 font-['Syne'] text-lg font-bold">Contact</h4>
             <ul className="space-y-4">
               <li className="flex gap-3">
-                <MapPin className="w-5 h-5 text-[#8DBF44] flex-shrink-0" />
-                <span className="font-['DM_Sans'] text-sm text-white/60">
-                  123 Geological Drive<br />
-                  Johannesburg, 2000<br />
-                  South Africa
-                </span>
+                <MapPin className="h-5 w-5 flex-shrink-0 text-[#8DBF44]" />
+                <span className="text-sm text-white/60">{companyProfile.laboratoryAddress.join(', ')}</span>
               </li>
               <li className="flex gap-3">
-                <Phone className="w-5 h-5 text-[#8DBF44] flex-shrink-0" />
-                <span className="font-['DM_Sans'] text-sm text-white/60">
-                  +27 12 345 6789
-                </span>
+                <Phone className="h-5 w-5 flex-shrink-0 text-[#8DBF44]" />
+                <span className="text-sm text-white/60">{companyProfile.phones.join(' / ')}</span>
               </li>
               <li className="flex gap-3">
-                <Mail className="w-5 h-5 text-[#8DBF44] flex-shrink-0" />
-                <span className="font-['DM_Sans'] text-sm text-white/60">
-                  info@geosciencelab.com
-                </span>
+                <Mail className="h-5 w-5 flex-shrink-0 text-[#8DBF44]" />
+                <span className="text-sm text-white/60">{companyProfile.emails[0]}</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-white/8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="font-['DM_Sans'] text-sm text-white/40">
-              © {new Date().getFullYear()} Geosciencelab. All rights reserved.
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-sm text-white/40">
+              Copyright {new Date().getFullYear()} {companyProfile.shortName}. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <a
-                href="#"
-                className="font-['DM_Sans'] text-sm text-white/40 hover:text-[#8DBF44] transition-colors duration-300"
-              >
-                Privacy Policy
+              <a href={companyProfile.website.startsWith('http') ? companyProfile.website : `https://${companyProfile.website}`} className="text-sm text-white/40 transition-colors duration-300 hover:text-[#8DBF44]">
+                {companyProfile.website}
               </a>
-              <a
-                href="#"
-                className="font-['DM_Sans'] text-sm text-white/40 hover:text-[#8DBF44] transition-colors duration-300"
-              >
-                Terms of Service
+              <a href="#contact" className="text-sm text-white/40 transition-colors duration-300 hover:text-[#8DBF44]">
+                Contact
               </a>
             </div>
           </div>

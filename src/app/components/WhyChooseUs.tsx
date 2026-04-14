@@ -1,44 +1,42 @@
 import { motion } from 'motion/react';
-import { CheckCircle2, Star, ArrowRight } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-
+import { ArrowRight, CheckCircle2, Star } from 'lucide-react';
+import { companyProfile } from '../companyProfile';
 export default function WhyChooseUs() {
   const features = [
     {
-      title: 'Fully Certified & ISO Accredited',
-      description: 'SANAS accreditation ensures results meet highest international standards'
+      title: 'Established Since 2006',
+      description: 'Operating for nearly two decades as a registered civil engineering soil testing laboratory.'
     },
     {
-      title: 'Advanced Laboratory Equipment',
-      description: 'State-of-the-art apparatus calibrated to SANS/ASTM precision'
+      title: 'Experienced Leadership',
+      description: `We bring ${companyProfile.leadership.managingDirectorExperience} years of civil engineering experience.`
     },
     {
-      title: 'Expert Multi-Disciplinary Team',
-      description: 'Geologists, engineers and technicians with 50+ years combined'
+      title: 'Local presence, National Reach',
+      description: 'Our Laboratory and office operations are positioned to support projects across Zimbabwe.'
     },
     {
-      title: 'Fast, Reliable Turnaround',
-      description: 'Tiered reporting timelines to suit project urgency'
+      title: 'Client-Focused Commitment',
+      description: 'We prioritize performance, client satisfaction, and dependable support.'
     },
     {
-      title: 'End-to-End Project Coverage',
-      description: 'From site investigation to certification and final sign-off'
+      title: 'Team-Based Delivery',
+      description: 'A compact team structured around management, administration, sales and field support roles.'
     }
   ];
 
   return (
     <section id="about" className="bg-[#24336A] py-24 md:py-32">
-      <div className="max-w-[1280px] mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
+      <div className="mx-auto max-w-[1280px] px-6">
+        <div className="grid items-center gap-16 lg:grid-cols-2">
           <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#8DBF44]/15 text-[#8DBF44] rounded-full font-['DM_Sans'] font-medium text-sm mb-6"
+              className="mb-6 inline-flex items-center gap-2 rounded-full bg-[#8DBF44]/15 px-4 py-2 text-sm font-medium text-[#8DBF44]"
             >
-              <Star className="w-4 h-4" />
+              <Star className="h-4 w-4" />
               WHY GEOSCIENCELAB
             </motion.div>
 
@@ -47,29 +45,35 @@ export default function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: 0.1 }}
-              className="font-['Syne'] font-bold text-4xl md:text-5xl text-white mb-8"
+              className="mb-6 font-['Syne'] text-4xl font-bold text-white md:text-5xl"
             >
-              Built on Precision. Backed by Decades of Expertise.
+              Built On Practical Testing Experience And Civil Engineering Discipline.
             </motion.h2>
 
-            <div className="space-y-6 mb-8">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: 0.15 }}
+              className="mb-8 max-w-2xl text-white/72"
+            >
+              {companyProfile.vision} {companyProfile.mission}
+            </motion.p>
+
+            <div className="mb-8 space-y-6">
               {features.map((feature, index) => (
                 <motion.div
-                  key={index}
+                  key={feature.title}
                   initial={{ x: -40, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
                   className="flex gap-4"
                 >
-                  <CheckCircle2 className="w-6 h-6 text-[#8DBF44] flex-shrink-0 mt-1" />
+                  <CheckCircle2 className="mt-1 h-6 w-6 flex-shrink-0 text-[#8DBF44]" />
                   <div>
-                    <h3 className="font-['DM_Sans'] font-semibold text-white text-lg mb-1">
-                      {feature.title}
-                    </h3>
-                    <p className="font-['DM_Sans'] text-white/70">
-                      {feature.description}
-                    </p>
+                    <h3 className="mb-1 text-lg font-semibold text-white">{feature.title}</h3>
+                    <p className="text-white/70">{feature.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -82,16 +86,15 @@ export default function WhyChooseUs() {
               transition={{ delay: 0.5 }}
             >
               <a
-                href="#"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#8DBF44] text-[#24336A] font-['DM_Sans'] font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(141,191,68,0.45)]"
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#8DBF44] px-8 py-4 font-semibold text-[#24336A] transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(141,191,68,0.45)]"
               >
-                Meet Our Team
-                <ArrowRight className="w-5 h-5" />
+                Speak To Our Team
+                <ArrowRight className="h-5 w-5" />
               </a>
             </motion.div>
           </div>
 
-          {/* Right Image with Floating Badges */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -99,32 +102,12 @@ export default function WhyChooseUs() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="relative rounded-3xl overflow-hidden">
-              <ImageWithFallback
-                src="https://images.unsplash.com/photo-1684259498673-0682943e188f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYWJvcmF0b3J5JTIwc2NpZW50aXN0JTIwdGVzdGluZyUyMG1hdGVyaWFsc3xlbnwxfHx8fDE3NzQ3ODgxNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Laboratory testing"
-                className="w-full h-[500px] object-cover"
+            <div className="relative overflow-hidden rounded-3xl">
+              <img
+                src="/company-profile-media.jpg"
+                alt="Construction plans and measuring tools"
+                className="h-[500px] w-full object-cover"
               />
-
-              {/* Floating Badge - ISO 17025 */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.2)]"
-              >
-                <div className="font-['Bebas_Neue'] text-3xl text-[#24336A]">ISO 17025</div>
-                <div className="font-['DM_Sans'] text-sm text-[#6B7280]">Accredited</div>
-              </motion.div>
-
-              {/* Floating Badge - Projects */}
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute bottom-6 right-6 bg-white/95 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-[0_8px_32px_rgba(0,0,0,0.2)]"
-              >
-                <div className="font-['Bebas_Neue'] text-3xl text-[#24336A]">1,000+</div>
-                <div className="font-['DM_Sans'] text-sm text-[#6B7280]">Projects</div>
-              </motion.div>
             </div>
           </motion.div>
         </div>

@@ -1,130 +1,136 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { Menu, X, Diamond } from 'lucide-react';
+import { BriefcaseBusiness, Building2, FileStack, Mail, Menu, PhoneCall, X } from 'lucide-react';
+import { companyProfile } from '../companyProfile';
+import GslLogo from './GslLogo';
+
+const navLinks = [
+  { name: 'Services', href: '#services', icon: BriefcaseBusiness },
+  { name: 'About Us', href: '#about', icon: Building2 },
+  { name: 'Our Work', href: '#clients', icon: FileStack },
+  { name: 'Contact', href: '#contact', icon: Mail }
+];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Services', href: '#services' },
-    { name: 'About Us', href: '#about' },
-    { name: 'Our Clients', href: '#clients' },
-    { name: 'Technology', href: '#technology' },
-    { name: 'Contact', href: '#contact' }
-  ];
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.querySelector(link.href))
+      .filter((section): section is HTMLElement => section instanceof HTMLElement);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry?.target.id) {
+          setActiveSection(`#${visibleEntry.target.id}`);
+        }
+      },
+      {
+        rootMargin: '-35% 0px -45% 0px',
+        threshold: [0.2, 0.35, 0.5]
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
-          scrolled
-            ? 'bg-[#24336A] shadow-lg border-b-2 border-[#8DBF44]/30'
-            : 'bg-transparent'
-        }`}
-        style={scrolled ? { backdropFilter: 'blur(20px)' } : {}}
-      >
-        <div className="max-w-[1280px] mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <a href="#" className="flex items-center gap-2">
-              <Diamond className="w-6 h-6 text-[#8DBF44] fill-[#8DBF44]" />
-              <span className="text-white font-['Syne'] font-extrabold text-2xl">
-                Geosciencelab
-              </span>
-            </a>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={`text-white font-['DM_Sans'] font-medium relative group ${
-                    activeSection === link.href ? 'text-[#8DBF44]' : ''
-                  }`}
-                >
-                  {link.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#8DBF44] transition-all duration-300 group-hover:w-full" />
-                </a>
-              ))}
-            </div>
-
-            {/* CTA Button */}
-            <div className="hidden lg:block">
-              <a
-                href="#contact"
-                className="relative inline-block px-7 py-3 bg-[#8DBF44] text-[#24336A] font-['DM_Sans'] font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(141,191,68,0.45)] overflow-hidden group"
-              >
-                <span className="relative z-10">Get a Quote</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 group-hover:animate-[shimmer_1.5s_ease-in-out] translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+    <header>
+      <nav data-state={menuOpen && 'active'} className="fixed z-20 w-full px-2 group">
+        <div
+          className={`mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12 ${
+            isScrolled ? 'max-w-5xl rounded-2xl border border-white/10 bg-brand-navy/82 backdrop-blur-lg lg:px-5' : ''
+          }`}
+        >
+          <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:flex-nowrap lg:gap-6 lg:py-4">
+            <div className="flex w-full justify-between lg:w-1/4 lg:flex-none">
+              <a href="#" aria-label="home" className="flex items-center lg:min-w-[160px]">
+                <GslLogo className="h-12 w-auto sm:h-14" compact />
               </a>
+
+              <button
+                onClick={() => setMenuOpen((current) => !current)}
+                aria-label={menuOpen ? 'Close Menu' : 'Open Menu'}
+                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+              >
+                <Menu className="m-auto size-6 duration-200 group-data-[state=active]:scale-0 group-data-[state=active]:rotate-180 group-data-[state=active]:opacity-0" />
+                <X className="absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200 group-data-[state=active]:rotate-0 group-data-[state=active]:scale-100 group-data-[state=active]:opacity-100" />
+              </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden text-white p-2"
-            >
-              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+            <div className="hidden flex-1 justify-center lg:flex">
+              <ul className="flex items-center gap-1 whitespace-nowrap text-sm">
+                {navLinks.map((item) => (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      className={`group inline-flex items-center gap-2 rounded-full px-4 py-2 font-semibold transition duration-150 ${
+                        activeSection === item.href ? 'text-brand-lime' : 'text-white hover:text-brand-lime'
+                      }`}
+                    >
+                      <item.icon
+                        size={16}
+                        className={activeSection === item.href ? 'text-brand-lime' : 'text-white/55 group-hover:text-brand-lime'}
+                      />
+                      <span>{item.name}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mb-6 hidden w-full flex-wrap items-center justify-end rounded-3xl border border-white/10 bg-brand-navy p-6 shadow-2xl shadow-zinc-950/25 group-data-[state=active]:block lg:mb-0 lg:flex lg:w-1/4 lg:flex-none lg:justify-end lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none">
+              <div className="lg:hidden">
+                <ul className="space-y-6 text-base">
+                  {navLinks.map((item) => (
+                    <li key={item.href}>
+                      <a
+                        href={item.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="block font-medium text-white/85 duration-150 hover:text-brand-lime"
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row md:w-fit lg:mt-0">
+                <a
+                  href={`tel:${companyProfile.phones[0].replace(/\s+/g, '')}`}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-transparent text-white transition hover:border-brand-lime hover:text-brand-lime"
+                  aria-label="Call us"
+                >
+                  <PhoneCall className="h-4 w-4" />
+                </a>
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-full border border-transparent bg-brand-lime px-4 py-2.5 text-sm font-semibold text-brand-navy transition hover:brightness-105"
+                >
+                  Request a Quote
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-      </motion.nav>
-
-      {/* Mobile Menu */}
-      <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={{
-          height: mobileMenuOpen ? 'auto' : 0,
-          opacity: mobileMenuOpen ? 1 : 0
-        }}
-        className="fixed top-[72px] left-0 right-0 bg-[#24336A] z-[999] lg:hidden overflow-hidden"
-      >
-        <div className="flex flex-col py-6 px-6 space-y-6">
-          {navLinks.map((link, index) => (
-            <motion.a
-              key={link.name}
-              href={link.href}
-              initial={{ x: -50, opacity: 0 }}
-              animate={{
-                x: mobileMenuOpen ? 0 : -50,
-                opacity: mobileMenuOpen ? 1 : 0
-              }}
-              transition={{ delay: index * 0.1 }}
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-white font-['DM_Sans'] font-medium text-lg"
-            >
-              {link.name}
-            </motion.a>
-          ))}
-          <motion.a
-            href="#contact"
-            initial={{ x: -50, opacity: 0 }}
-            animate={{
-              x: mobileMenuOpen ? 0 : -50,
-              opacity: mobileMenuOpen ? 1 : 0
-            }}
-            transition={{ delay: navLinks.length * 0.1 }}
-            onClick={() => setMobileMenuOpen(false)}
-            className="w-full px-7 py-3 bg-[#8DBF44] text-[#24336A] font-['DM_Sans'] font-semibold rounded-lg text-center"
-          >
-            Get a Quote
-          </motion.a>
-        </div>
-      </motion.div>
-    </>
+      </nav>
+    </header>
   );
 }

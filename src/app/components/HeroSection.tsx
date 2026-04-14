@@ -1,187 +1,236 @@
-import { motion } from 'motion/react';
-import { ChevronDown, Diamond } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import { ArrowRight, ChevronRight } from 'lucide-react';
+import { companyProfile } from '../companyProfile';
+import { StarButton } from './StarButton';
 
-export default function HeroSection() {
-  const containerVariants = {
-    hidden: {},
+const heroBackgroundImages = [
+  '/hero-slide-1.jpg',
+  '/hero-slide-2.jpg',
+  '/hero-slide-3.jpg',
+  '/hero-slide-4.jpg'
+];
+
+const transitionVariants = {
+  item: {
+    hidden: {
+      opacity: 0,
+      filter: 'blur(12px)',
+      y: 12
+    },
     visible: {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
       transition: {
-        staggerChildren: 0.2
+        type: 'spring',
+        bounce: 0.3,
+        duration: 1.5
       }
     }
-  };
+  }
+};
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.8, ease: 'easeOut' }
-    }
-  };
+export default function HeroSection() {
+  const [activeBackground, setActiveBackground] = useState(0);
 
-  const words = ['Where', 'Precision', 'Meets', 'Excellence.'];
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveBackground((current) => (current + 1) % heroBackgroundImages.length);
+    }, 300000);
+
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#24336A]">
-      {/* Animated Background Layers */}
-      <div className="absolute inset-0">
-        {/* Gradient Mesh */}
-        <div className="absolute inset-0 opacity-40">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#8DBF44]/20 via-transparent to-[#24336A]" />
-          <div className="absolute inset-0 bg-gradient-to-tl from-[#8DBF44]/10 via-transparent to-transparent" />
-        </div>
-
-        {/* Noise Texture */}
-        <div className="absolute inset-0 opacity-[0.04] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')]" />
-
-        {/* Rotating Geometric SVG */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.06]"
-        >
-          <svg viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M400 100 L600 250 L600 550 L400 700 L200 550 L200 250 Z" stroke="#8DBF44" strokeWidth="2" />
-            <path d="M400 150 L550 250 L550 550 L400 650 L250 550 L250 250 Z" stroke="#8DBF44" strokeWidth="2" />
-            <path d="M400 200 L500 300 L500 500 L400 600 L300 500 L300 300 Z" stroke="#8DBF44" strokeWidth="2" />
-          </svg>
-        </motion.div>
+    <main className="relative overflow-hidden">
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={heroBackgroundImages[activeBackground]}
+            src={heroBackgroundImages[activeBackground]}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2, ease: 'easeInOut' }}
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.16)_0%,rgba(36,51,106,0.34)_36%,rgba(17,24,39,0.54)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(95%_95%_at_50%_18%,rgba(141,191,68,0.06)_0%,rgba(36,51,106,0.08)_48%,rgba(17,24,39,0.18)_100%)]" />
       </div>
 
-      {/* Content Container */}
-      <div className="max-w-[1280px] mx-auto px-6 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[2] hidden isolate opacity-35 contain-strict lg:block"
+      >
+        <div className="absolute left-0 top-0 h-[80rem] w-[35rem] -translate-y-[350px] -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,rgba(141,191,68,.12)_0,rgba(141,191,68,.04)_50%,rgba(141,191,68,0)_80%)]" />
+        <div className="absolute left-0 top-0 h-[80rem] w-56 [translate:5%_-50%] -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(238,238,238,.08)_0,rgba(238,238,238,.02)_80%,transparent_100%)]" />
+        <div className="absolute left-0 top-0 h-[80rem] w-56 -translate-y-[350px] -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(36,51,106,.25)_0,rgba(36,51,106,.08)_80%,transparent_100%)]" />
+      </div>
+
+      <section className="relative z-10">
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.06)_0%,rgba(36,51,106,0.14)_42%,rgba(17,24,39,0.32)_100%)]" />
+        <div className="absolute inset-0 z-0 size-full bg-[radial-gradient(125%_125%_at_50%_100%,transparent_0%,rgba(36,51,106,0.08)_55%,rgba(17,24,39,0.36)_100%)]" />
+        <div className="relative z-10 pt-28 md:pt-36">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="text-center">
+              <motion.div
+                variants={{
+                  container: {
+                    visible: {
+                      transition: {
+                        delayChildren: 0.15,
+                        staggerChildren: 0.08
+                      }
+                    }
+                  },
+                  ...transitionVariants
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <a
+                  href="#contact"
+                  className="mx-auto flex w-fit items-center gap-4 rounded-full border border-white/14 bg-brand-navy/42 p-1 pl-4 shadow-md shadow-black/20 backdrop-blur-md transition-all duration-300 hover:bg-brand-navy/58"
+                >
+                  <span className="text-sm text-white/88">
+                    {companyProfile.motto}
+                  </span>
+                  <span className="block h-4 w-px bg-white/15" />
+                  <div className="flex size-7 items-center justify-center rounded-full bg-brand-lime text-brand-navy">
+                    <ChevronRight className="size-4" />
+                  </div>
+                </a>
+
+                <motion.h1
+                  variants={transitionVariants.item}
+                  className="mx-auto mt-8 max-w-5xl text-balance font-display text-5xl font-extrabold leading-[0.98] tracking-[-0.04em] text-white md:text-7xl xl:text-[5.15rem]"
+                >
+                  Reliable Civil Engineering Testing And Ground Investigation Support.
+                </motion.h1>
+
+                <motion.p
+                  variants={transitionVariants.item}
+                  className="mx-auto mt-8 max-w-3xl text-balance text-lg leading-8 text-white/74"
+                >
+                  {companyProfile.shortName} provides soil testing, foundation and pavement design,
+                  binder distribution calibration, and project management support for infrastructure,
+                  mining, housing and institutional projects across Zimbabwe.
+                </motion.p>
+              </motion.div>
+
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  container: {
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.05,
+                        delayChildren: 0.45
+                      }
+                    }
+                  },
+                  ...transitionVariants
+                }}
+                className="mt-12 flex flex-col items-center justify-center gap-3 md:flex-row"
+              >
+                <motion.div variants={transitionVariants.item} className="rounded-[14px] border border-white/10 bg-white/8 p-0.5">
+                  <StarButton
+                    href="#contact"
+                    backgroundColor="#8DBF44"
+                    lightColor="rgba(255,255,255,0.9)"
+                    className="bg-brand-lime text-brand-navy"
+                  >
+                    Request Project Support
+                    <ArrowRight className="size-4" />
+                  </StarButton>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+
           <motion.div
-            variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-6"
+            variants={{
+              container: {
+                visible: {
+                  transition: {
+                    staggerChildren: 0.05,
+                    delayChildren: 0.65
+                  }
+                }
+              },
+              ...transitionVariants
+            }}
           >
-            {/* Pre-headline Badge */}
-            <motion.div variants={itemVariants}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#8DBF44]/15 text-[#8DBF44] rounded-full font-['DM_Sans'] font-medium text-sm">
-                <span className="w-2 h-2 bg-[#8DBF44] rounded-full" />
-                ISO 17025 Accredited
+            <div className="relative -mr-56 mt-10 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
+              <div aria-hidden className="absolute inset-0 z-10 bg-gradient-to-b from-transparent from-35% to-brand-navy" />
+              <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[28px] border border-white/10 bg-white/6 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.35)] ring-1 ring-white/10">
+                <div className="grid gap-4 lg:grid-cols-[1.2fr_.8fr]">
+                  <div className="relative overflow-hidden rounded-2xl border border-white/10">
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="aspect-[15/10] w-full object-cover"
+                    >
+                      <source src="/hero-background.mp4" type="video/mp4" />
+                    </video>
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(36,51,106,0.06)_0%,rgba(17,24,39,0.24)_100%)]" />
+                  </div>
+
+                  <div className="flex flex-col justify-between rounded-2xl border border-white/10 bg-[#1A2553] p-6 text-left text-white">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.22em] text-brand-lime">Company profile</p>
+                      <h3 className="mt-3 font-display text-3xl font-bold leading-tight">
+                        Grounded in experience. Structured for dependable delivery.
+                      </h3>
+                      <p className="mt-4 text-sm leading-7 text-white/72">
+                        {companyProfile.motto}. Our team supports geotechnical investigations,
+                        project quality control, DCP testing, cube testing and design-related
+                        engineering decisions.
+                      </p>
+                    </div>
+
+                    <div className="mt-8 grid grid-cols-2 gap-3">
+                      <div className="rounded-2xl bg-white/6 p-4">
+                        <div className="font-impact text-4xl text-brand-lime">2006</div>
+                        <div className="mt-1 text-xs uppercase tracking-[0.18em] text-white/55">
+                          Founded
+                        </div>
+                      </div>
+                      <div className="rounded-2xl bg-white/6 p-4">
+                        <div className="font-impact text-4xl text-brand-lime">35+</div>
+                        <div className="mt-1 text-xs uppercase tracking-[0.18em] text-white/55">
+                          Leadership years
+                        </div>
+                      </div>
+                      <div className="rounded-2xl bg-white/6 p-4">
+                        <div className="font-impact text-4xl text-brand-lime">10</div>
+                        <div className="mt-1 text-xs uppercase tracking-[0.18em] text-white/55">
+                          Team members
+                        </div>
+                      </div>
+                      <div className="rounded-2xl bg-white/6 p-4">
+                        <div className="font-impact text-4xl text-brand-lime">2</div>
+                        <div className="mt-1 text-xs uppercase tracking-[0.18em] text-white/55">
+                          Operating bases
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </motion.div>
-
-            {/* Main Headline with Word Pull-up */}
-            <div className="overflow-hidden">
-              <h1 className="font-['Syne'] font-extrabold text-white leading-[1.1]">
-                {words.map((word, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ y: 100, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.2 + index * 0.1, duration: 0.8 }}
-                    className={`inline-block mr-4 text-5xl md:text-6xl lg:text-7xl xl:text-8xl ${
-                      word === 'Excellence.' ? 'text-[#8DBF44]' : ''
-                    }`}
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </h1>
-            </div>
-
-            {/* Subheadline */}
-            <motion.p
-              variants={itemVariants}
-              className="text-white/75 font-['DM_Sans'] text-lg max-w-[520px]"
-            >
-              Leading geoscience testing, material analysis, and consulting services. Trusted by
-              industry leaders across Southern Africa.
-            </motion.p>
-
-            {/* Motto */}
-            <motion.div
-              variants={itemVariants}
-              className="border-l-3 border-[#8DBF44] pl-4"
-            >
-              <p className="text-white/60 font-['DM_Sans'] italic font-medium text-[15px]">
-                "We maintain the standard of good, quality workmanship"
-              </p>
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
-              <a
-                href="#contact"
-                className="group relative inline-flex items-center justify-center px-9 py-4 bg-[#8DBF44] text-[#24336A] font-['DM_Sans'] font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_12px_40px_rgba(141,191,68,0.45)] overflow-hidden"
-              >
-                <span className="relative z-10">Get an Instant Quote →</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
-              </a>
-              <a
-                href="#services"
-                className="inline-flex items-center justify-center px-9 py-4 border-2 border-white/40 text-white font-['DM_Sans'] font-semibold rounded-lg transition-all duration-300 hover:border-[#8DBF44] hover:text-[#8DBF44] hover:bg-[#8DBF44]/8"
-              >
-                Explore Services
-              </a>
-            </motion.div>
-
-            {/* Trust Badges */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap gap-6 pt-4 text-white/60 font-['DM_Sans'] font-medium text-[13px]"
-            >
-              <div className="flex items-center gap-2">
-                <Diamond className="w-3 h-3 text-[#8DBF44]" />
-                50+ Years Combined Experience
-              </div>
-              <div className="flex items-center gap-2">
-                <Diamond className="w-3 h-3 text-[#8DBF44]" />
-                1,000+ Projects Completed
-              </div>
-              <div className="flex items-center gap-2">
-                <Diamond className="w-3 h-3 text-[#8DBF44]" />
-                ISO 17025 Accredited
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="relative hidden lg:block"
-          >
-            <div
-              className="relative overflow-hidden rounded-2xl"
-              style={{
-                clipPath: 'polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%)',
-                borderLeft: '4px solid #8DBF44'
-              }}
-            >
-              <ImageWithFallback
-                src="https://images.unsplash.com/photo-1610079874731-5103e6157648?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZW9sb2dpY2FsJTIwZmllbGQlMjB3b3JrJTIwc2NpZW50aXN0fGVufDF8fHx8MTc3NDc4ODE2MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Geological field work"
-                className="w-full h-[600px] object-cover mix-blend-luminosity opacity-30"
-              />
             </div>
           </motion.div>
         </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-8 h-12 border-2 border-white/40 rounded-full flex items-center justify-center"
-        >
-          <ChevronDown className="text-white/60" size={20} />
-        </motion.div>
-      </motion.div>
-    </section>
+      </section>
+    </main>
   );
 }

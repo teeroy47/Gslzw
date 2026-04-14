@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { useState } from 'react';
 import {
   ArrowRight,
   ClipboardCheck,
@@ -51,6 +52,8 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const [activeCard, setActiveCard] = useState<number | null>(0);
+
   return (
     <section id="services" className="bg-white py-24 md:py-32">
       <div className="mx-auto max-w-[1280px] px-6">
@@ -92,32 +95,74 @@ export default function ServicesSection() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
+              onViewportEnter={() => setActiveCard(index)}
               transition={{ delay: index * 0.12, duration: 0.6 }}
-              className="group relative overflow-hidden rounded-2xl border border-[rgba(36,51,106,0.08)] bg-white p-9 shadow-[0_4px_24px_rgba(36,51,106,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-[#8DBF44] hover:shadow-[0_8px_40px_rgba(36,51,106,0.12)]"
+              onClick={() => setActiveCard((current) => (current === index ? null : index))}
+              className={`group relative overflow-hidden rounded-2xl border bg-white p-9 shadow-[0_4px_24px_rgba(36,51,106,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-[#8DBF44] hover:shadow-[0_8px_40px_rgba(36,51,106,0.12)] ${
+                activeCard === index
+                  ? 'border-[#8DBF44] shadow-[0_8px_40px_rgba(36,51,106,0.12)]'
+                  : 'border-[rgba(36,51,106,0.08)]'
+              }`}
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                style={{ backgroundImage: `url('${service.image}')` }}
+              <img
+                src={service.image}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ${
+                  activeCard === index ? 'scale-105' : 'group-hover:scale-105'
+                }`}
               />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.88)_0%,rgba(255,255,255,0.72)_24%,rgba(36,51,106,0.82)_100%)] transition-all duration-300 group-hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.82)_0%,rgba(36,51,106,0.30)_18%,rgba(36,51,106,0.88)_100%)]" />
+              <div
+                className={`absolute inset-0 transition-all duration-300 ${
+                  activeCard === index
+                    ? 'bg-[linear-gradient(180deg,rgba(255,255,255,0.49)_0%,rgba(36,51,106,0.18)_18%,rgba(36,51,106,0.53)_100%)]'
+                    : 'bg-[linear-gradient(180deg,rgba(255,255,255,0.53)_0%,rgba(255,255,255,0.43)_24%,rgba(36,51,106,0.49)_100%)] group-hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.49)_0%,rgba(36,51,106,0.18)_18%,rgba(36,51,106,0.53)_100%)]'
+                }`}
+              />
 
               <div className="relative z-10 mb-6">
-                <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-[rgba(36,51,106,0.10)] bg-white/92 backdrop-blur-sm transition-all duration-300 group-hover:border-[#8DBF44] group-hover:bg-[#8DBF44]">
-                  <service.icon className="h-10 w-10 text-[#24336A] transition-colors duration-300 group-hover:text-white" />
+                <div
+                  className={`flex h-16 w-16 items-center justify-center rounded-xl border border-[rgba(36,51,106,0.10)] bg-white/92 backdrop-blur-sm transition-all duration-300 ${
+                    activeCard === index ? 'border-[#8DBF44] bg-[#8DBF44]' : 'group-hover:border-[#8DBF44] group-hover:bg-[#8DBF44]'
+                  }`}
+                >
+                  <service.icon
+                    className={`h-10 w-10 text-[#24336A] transition-colors duration-300 ${
+                      activeCard === index ? 'text-white' : 'group-hover:text-white'
+                    }`}
+                  />
                 </div>
               </div>
 
-              <h3 className="relative z-10 mb-3 font-['Syne'] text-xl font-bold text-[#24336A] transition-colors duration-300 group-hover:text-white">
+              <h3
+                className={`relative z-10 mb-3 font-['Syne'] text-xl font-bold transition-colors duration-300 ${
+                  activeCard === index ? 'text-white' : 'text-[#24336A] group-hover:text-white'
+                }`}
+              >
                 {service.title}
               </h3>
-              <p className="relative z-10 mb-4 leading-relaxed text-[#4B5563] transition-colors duration-300 group-hover:text-white/82">
+              <p
+                className={`relative z-10 mb-4 leading-relaxed transition-colors duration-300 ${
+                  activeCard === index ? 'text-white/82' : 'text-[#4B5563] group-hover:text-white/82'
+                }`}
+              >
                 {service.description}
               </p>
 
-              <div className="relative z-10 h-0 overflow-hidden transition-all duration-300 group-hover:h-auto">
+              <div
+                className={`relative z-10 overflow-hidden transition-all duration-300 ${
+                  activeCard === index ? 'h-auto' : 'h-0 group-hover:h-auto'
+                }`}
+              >
                 <a
                   href="#contact"
-                  className="inline-flex translate-x-[-20px] items-center gap-2 text-sm font-semibold text-[#8DBF44] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                  className={`inline-flex items-center gap-2 text-sm font-semibold text-[#8DBF44] transition-all duration-300 ${
+                    activeCard === index
+                      ? 'translate-x-0 opacity-100'
+                      : 'translate-x-[-20px] opacity-0 group-hover:translate-x-0 group-hover:opacity-100'
+                  }`}
                 >
                   Ask About This Service
                   <ArrowRight className="h-4 w-4" />

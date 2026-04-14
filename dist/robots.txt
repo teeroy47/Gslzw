@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://teeroy47.github.io/Gslzw/sitemap.xml

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { companyProfile } from '../companyProfile';
 import { StarButton } from './StarButton';
@@ -36,31 +36,75 @@ const transitionVariants = {
 
 export default function HeroSection() {
   const [activeBackground, setActiveBackground] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    const updateMobileState = () => setIsMobile(mediaQuery.matches);
+
+    updateMobileState();
+    mediaQuery.addEventListener('change', updateMobileState);
+
+    return () => mediaQuery.removeEventListener('change', updateMobileState);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const timer = window.setInterval(() => {
       setActiveBackground((current) => (current + 1) % heroBackgroundImages.length);
     }, 300000);
 
     return () => window.clearInterval(timer);
+  }, [isMobile]);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    video.playsInline = true;
+
+    const playPromise = video.play();
+    if (playPromise) {
+      playPromise.catch(() => {
+        // Autoplay can still be blocked by some mobile browsers until media is in view.
+      });
+    }
   }, []);
 
   return (
     <main className="relative overflow-hidden">
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={heroBackgroundImages[activeBackground]}
-            src={heroBackgroundImages[activeBackground]}
+        {isMobile ? (
+          <img
+            src={heroBackgroundImages[0]}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 2, ease: 'easeInOut' }}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
           />
-        </AnimatePresence>
+        ) : (
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={heroBackgroundImages[activeBackground]}
+              src={heroBackgroundImages[activeBackground]}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 2, ease: 'easeInOut' }}
+            />
+          </AnimatePresence>
+        )}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.16)_0%,rgba(36,51,106,0.34)_36%,rgba(17,24,39,0.54)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(95%_95%_at_50%_18%,rgba(141,191,68,0.06)_0%,rgba(36,51,106,0.08)_48%,rgba(17,24,39,0.18)_100%)]" />
       </div>
@@ -189,15 +233,27 @@ export default function HeroSection() {
               <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[28px] border border-white/10 bg-white/6 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.35)] ring-1 ring-white/10">
                 <div className="grid gap-4 lg:grid-cols-[1.2fr_.8fr]">
                   <div className="relative overflow-hidden rounded-2xl border border-white/10">
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="aspect-[15/10] w-full object-cover"
-                    >
-                      <source src={`${assetBase}hero-background.mp4`} type="video/mp4" />
-                    </video>
+                    {isMobile ? (
+                      <img
+                        src={heroBackgroundImages[0]}
+                        alt="Civil engineering site overview"
+                        className="aspect-[15/10] w-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ) : (
+                      <video
+                        ref={heroVideoRef}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        className="aspect-[15/10] w-full object-cover"
+                      >
+                        <source src={`${assetBase}hero-background.mp4`} type="video/mp4" />
+                      </video>
+                    )}
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(36,51,106,0.06)_0%,rgba(17,24,39,0.24)_100%)]" />
                   </div>
 

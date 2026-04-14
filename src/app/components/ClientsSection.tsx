@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
+import { useState } from 'react';
 import { companyProfile } from '../companyProfile';
 
 export default function ClientsSection() {
+  const [activeClient, setActiveClient] = useState<number | null>(0);
+
   return (
     <section id="clients" className="bg-[#F4F6FA] py-24 md:py-32">
       <div className="mx-auto max-w-[1280px] px-6">
@@ -23,26 +26,56 @@ export default function ClientsSection() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
+              onViewportEnter={() => setActiveClient(index)}
               transition={{ delay: index * 0.12, duration: 0.6 }}
-              className="client-card group relative flex h-[120px] items-center justify-center overflow-hidden rounded-2xl border border-[rgba(36,51,106,0.08)] bg-white px-10 py-8"
+              onClick={() => setActiveClient((current) => (current === index ? null : index))}
+              className={`client-card group relative flex h-[120px] items-center justify-center overflow-hidden rounded-2xl border bg-white px-10 py-8 ${
+                activeClient === index ? 'is-active border-[#8DBF44]' : 'border-[rgba(36,51,106,0.08)]'
+              }`}
             >
-              <div className="relative z-10 text-center font-['Syne'] text-lg font-bold text-[#24336A] opacity-60 grayscale transition-all duration-300 group-hover:text-white group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-200">
+              <div
+                className={`relative z-10 text-center font-['Syne'] text-lg font-bold transition-all duration-300 ${
+                  activeClient === index
+                    ? 'text-white opacity-100 grayscale-0 brightness-200'
+                    : 'text-[#24336A] opacity-60 grayscale group-hover:text-white group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-200'
+                }`}
+              >
                 {client}
               </div>
 
-              <div className="absolute inset-0 -z-0 bg-[#24336A] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="absolute inset-0 opacity-0 shadow-[0_32px_80px_rgba(36,51,106,0.25)] transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-[#8DBF44] transition-all duration-300 group-hover:w-full" />
+              <div
+                className={`absolute inset-0 -z-0 bg-[#24336A] transition-opacity duration-300 ${
+                  activeClient === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}
+              />
+              <div
+                className={`absolute inset-0 shadow-[0_32px_80px_rgba(36,51,106,0.25)] transition-opacity duration-300 ${
+                  activeClient === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}
+              />
+              <div
+                className={`absolute bottom-0 left-0 h-[3px] bg-[#8DBF44] transition-all duration-300 ${
+                  activeClient === index ? 'w-full' : 'w-0 group-hover:w-full'
+                }`}
+              />
 
               <svg
-                className="absolute right-0 top-0 h-8 w-8 text-[#8DBF44] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                className={`absolute right-0 top-0 h-8 w-8 text-[#8DBF44] transition-opacity duration-300 ${
+                  activeClient === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                }`}
                 viewBox="0 0 32 32"
                 fill="none"
               >
                 <path d="M32 0 L32 32 L0 0 Z" fill="currentColor" />
               </svg>
 
-              <div className="absolute bottom-4 left-0 right-0 translate-y-4 text-center opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+              <div
+                className={`absolute bottom-4 left-0 right-0 text-center transition-all duration-300 ${
+                  activeClient === index
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100'
+                }`}
+              >
                 <span className="text-xs text-white/80">Profile Referenced Work</span>
               </div>
             </motion.div>

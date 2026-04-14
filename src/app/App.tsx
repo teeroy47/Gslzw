@@ -12,13 +12,15 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <HeroSection />
-      <ServicesSection />
-      <WhyChooseUs />
-      <ClientsSection />
-      <TechnologySection />
-      <CTASection />
-      <ContactSection />
+      <main>
+        <HeroSection />
+        <ServicesSection />
+        <WhyChooseUs />
+        <ClientsSection />
+        <TechnologySection />
+        <CTASection />
+        <ContactSection />
+      </main>
       <Footer />
     </div>
   );

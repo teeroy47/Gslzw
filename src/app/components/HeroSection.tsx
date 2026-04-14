@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { companyProfile } from '../companyProfile';
 import { StarButton } from './StarButton';
+import { Typewriter } from './Typewriter';
 
 const heroBackgroundImages = [
   '/hero-slide-1.jpg',
@@ -109,7 +110,20 @@ export default function HeroSection() {
                   variants={transitionVariants.item}
                   className="mx-auto mt-8 max-w-5xl text-balance font-display text-5xl font-extrabold leading-[0.98] tracking-[-0.04em] text-white md:text-7xl xl:text-[5.15rem]"
                 >
-                  Reliable Civil Engineering Testing And Ground Investigation Support.
+                  <span className="block">Reliable Civil Engineering</span>
+                  <span className="block">Testing And</span>
+                  <span className="block min-h-[1.2em] text-brand-lime">
+                    <Typewriter
+                      words={[
+                        'Ground Investigation Support.',
+                        'Soil Testing Services.',
+                        'Foundation Design Support.',
+                        'Pavement Design Expertise.'
+                      ]}
+                      speed={85}
+                      delayBetweenWords={1800}
+                    />
+                  </span>
                 </motion.h1>
 
                 <motion.p

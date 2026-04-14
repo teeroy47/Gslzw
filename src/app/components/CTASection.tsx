@@ -2,11 +2,13 @@ import { motion } from 'motion/react';
 import { ArrowRight, Check } from 'lucide-react';
 
 export default function CTASection() {
+  const ctaBackground = `${import.meta.env.BASE_URL}cta-background.jpg`;
+
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="/cta-background.jpg"
+          src={ctaBackground}
           alt=""
           aria-hidden="true"
           className="h-full w-full object-cover object-center"

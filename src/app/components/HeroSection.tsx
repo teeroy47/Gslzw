@@ -5,11 +5,13 @@ import { companyProfile } from '../companyProfile';
 import { StarButton } from './StarButton';
 import { Typewriter } from './Typewriter';
 
+const assetBase = import.meta.env.BASE_URL;
+
 const heroBackgroundImages = [
-  '/hero-slide-1.jpg',
-  '/hero-slide-2.jpg',
-  '/hero-slide-3.jpg',
-  '/hero-slide-4.jpg'
+  `${assetBase}hero-slide-1.jpg`,
+  `${assetBase}hero-slide-2.jpg`,
+  `${assetBase}hero-slide-3.jpg`,
+  `${assetBase}hero-slide-4.jpg`
 ];
 
 const transitionVariants = {
@@ -194,7 +196,7 @@ export default function HeroSection() {
                       playsInline
                       className="aspect-[15/10] w-full object-cover"
                     >
-                      <source src="/hero-background.mp4" type="video/mp4" />
+                      <source src={`${assetBase}hero-background.mp4`} type="video/mp4" />
                     </video>
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(36,51,106,0.06)_0%,rgba(17,24,39,0.24)_100%)]" />
                   </div>

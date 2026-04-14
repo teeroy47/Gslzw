@@ -4,5 +4,5 @@ type GslLogoProps = {
 };
 
 export default function GslLogo({ className = '' }: GslLogoProps) {
-  return <img src="/gsl-logo.png" alt="Geosciencelab logo" className={className} />;
+  return <img src={`${import.meta.env.BASE_URL}gsl-logo.png`} alt="Geosciencelab logo" className={className} />;
 }

@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Star } from 'lucide-react';
 import { companyProfile } from '../companyProfile';
 export default function WhyChooseUs() {
+  const companyProfileMedia = `${import.meta.env.BASE_URL}company-profile-media.jpg`;
+
   const features = [
     {
       title: 'Established Since 2006',
@@ -104,7 +106,7 @@ export default function WhyChooseUs() {
           >
             <div className="relative overflow-hidden rounded-3xl">
               <img
-                src="/company-profile-media.jpg"
+                src={companyProfileMedia}
                 alt="Construction plans and measuring tools"
                 className="h-[500px] w-full object-cover"
               />

@@ -9,42 +9,44 @@ import {
   TestTubeDiagonal
 } from 'lucide-react';
 
+const assetBase = import.meta.env.BASE_URL;
+
 const services = [
   {
     icon: TestTubeDiagonal,
     title: 'Soil Testing',
     description: 'Registered civil engineering soil testing support for field and laboratory programmes.',
-    image: '/service-soil-testing.jpg'
+    image: `${assetBase}service-soil-testing.jpg`
   },
   {
     icon: Ruler,
     title: 'Foundation Design',
     description: 'Foundation investigation inputs and design support informed by site-specific ground conditions.',
-    image: '/service-foundation-design.jpg'
+    image: `${assetBase}service-foundation-design.jpg`
   },
   {
     icon: Map,
     title: 'Pavement Design',
     description: 'Pavement design and site investigation work for roads, access routes and service infrastructure.',
-    image: '/service-pavement-design.jpg'
+    image: `${assetBase}service-pavement-design.jpg`
   },
   {
     icon: ClipboardCheck,
     title: 'Binder Distribution Calibration',
     description: 'Calibration services for bitumen and binder distribution to improve consistency and control.',
-    image: '/service-binder-distribution-calibration.jpg'
+    image: `${assetBase}service-binder-distribution-calibration.jpg`
   },
   {
     icon: HardHat,
     title: 'Project Management',
     description: 'Technical supervision, reporting and project coordination across civil engineering work packages.',
-    image: '/service-project-management.jpg'
+    image: `${assetBase}service-project-management.jpg`
   },
   {
     icon: Hexagon,
     title: 'Quality Control Testing',
     description: 'Densities, cube tests, moisture checks and DCP support for active construction and rehabilitation projects.',
-    image: '/service-quality-control-testing.jpg'
+    image: `${assetBase}service-quality-control-testing.jpg`
   }
 ];
 

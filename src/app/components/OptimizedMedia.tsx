@@ -25,6 +25,36 @@ function withBase(url: string) {
   return `${assetBase}${url.replace(/^\//, '')}`;
 }
 
+function getBestImageVariant(src: string, targetWidth = 480) {
+  const fileName = src.split('/').pop() ?? src;
+  const entry = manifest.images[fileName];
+
+  if (!entry?.variants?.length) return withBase(src);
+
+  const variants = [...entry.variants].sort((a, b) => a.width - b.width);
+  const variant = variants.find((item) => item.width >= targetWidth) ?? variants.at(-1)!;
+
+  return withBase(variant.webp ?? variant.fallback);
+}
+
+export function prewarmOptimizedImages(srcs: string[], targetWidth = 480) {
+  if (typeof window === 'undefined') return;
+
+  const uniqueSrcs = Array.from(new Set(srcs));
+
+  uniqueSrcs.forEach((src) => {
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = getBestImageVariant(src, targetWidth);
+
+    if ('decode' in img) {
+      img.decode().catch(() => {
+        // Prewarming is opportunistic; failed decodes should never affect UI.
+      });
+    }
+  });
+}
+
 export type OptimizedImageProps = Omit<
   React.ImgHTMLAttributes<HTMLImageElement>,
   'src' | 'srcSet' | 'sizes'

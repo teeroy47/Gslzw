@@ -65,6 +65,7 @@ async function optimizeImage(fileName) {
   const usableWidths = imageWidths.filter((width) => width <= originalWidth);
   const widths = usableWidths.length > 0 ? usableWidths : [originalWidth];
   const variants = [];
+  const isTeamPortrait = fileName.startsWith('team-');
 
   for (const width of widths) {
     const webpName = `${parsed.name}-${width}.webp`;
@@ -76,7 +77,7 @@ async function optimizeImage(fileName) {
     if (!(await isFresh(sourcePath, [webpPath]))) {
       await sharp(sourcePath)
         .resize({ width, withoutEnlargement: true })
-        .webp({ quality: 78, effort: 5 })
+        .webp({ quality: isTeamPortrait ? 92 : 78, effort: 5 })
         .toFile(webpPath);
     }
 
@@ -89,7 +90,7 @@ async function optimizeImage(fileName) {
       } else {
         await sharp(sourcePath)
           .resize({ width, withoutEnlargement: true })
-          .jpeg({ quality: 82, mozjpeg: true })
+          .jpeg({ quality: isTeamPortrait ? 94 : 82, mozjpeg: true })
           .toFile(fallbackPath);
       }
     }

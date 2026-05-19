@@ -1,11 +1,14 @@
 import { motion } from 'motion/react';
 import {
   ArrowRight,
+  Building2,
   ClipboardCheck,
   HardHat,
   Hexagon,
+  RotateCcw,
   Map,
   Ruler,
+  Shovel,
   TestTubeDiagonal
 } from 'lucide-react';
 import { engineeredEase, viewportOnce } from '../motion';
@@ -47,6 +50,42 @@ const services = [
     title: 'Quality Control Testing',
     description: 'Densities, cube tests, moisture checks and DCP support for active construction and rehabilitation projects.',
     image: 'service-quality-control-testing.jpg'
+  },
+  {
+    icon: HardHat,
+    title: 'Road Construction and Landscape Rehabilitation',
+    description: 'Civil works support for road construction, reinstatement, landscape rehabilitation and practical site delivery.',
+    image: 'service-pavement-design.jpg'
+  },
+  {
+    icon: Shovel,
+    title: 'Bulk Earth Works',
+    description: 'Bulk earthworks support including site shaping, formation preparation and controlled ground movement.',
+    image: 'service-soil-testing.jpg'
+  },
+  {
+    icon: Building2,
+    title: 'Building Works',
+    description: 'Structured building works support aligned with civil engineering supervision and quality-control requirements.',
+    image: 'service-foundation-design.jpg'
+  },
+  {
+    icon: ClipboardCheck,
+    title: 'Cut Waste Removal',
+    description: 'Coordinated cut waste removal services to keep construction sites controlled, accessible and programme-ready.',
+    image: 'service-project-management.jpg'
+  },
+  {
+    icon: RotateCcw,
+    title: 'Property Restoration',
+    description: 'Restoration support for properties affected by civil works, earth movement, rehabilitation or site reinstatement.',
+    image: 'service-quality-control-testing.jpg'
+  },
+  {
+    icon: HardHat,
+    title: 'Rubble Haulage',
+    description: 'Rubble haulage and site clearing support for construction, rehabilitation and restoration work packages.',
+    image: 'service-binder-distribution-calibration.jpg'
   }
 ];
 
@@ -81,27 +120,32 @@ export default function ServicesSection() {
             className="mx-auto max-w-3xl text-base leading-7 text-[#6B7280] md:text-lg"
           >
             Specialists in soil testing, foundation and pavement design, binder distribution
-            calibration, and project management from Norton and Harare.
+            calibration, project management, road works and site rehabilitation from Norton and Harare.
           </motion.p>
         </div>
 
         <div className="mb-10 grid gap-4 md:mb-12 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewportOnce}
-              transition={{ delay: index * 0.055, duration: 0.42, ease: engineeredEase }}
-              className="group relative min-h-[335px] overflow-hidden rounded-[1.15rem] border border-white/10 bg-[#111827] shadow-[0_14px_38px_rgba(17,24,39,0.14)] ring-1 ring-[#24336A]/5 transition-all duration-[320ms] hover:-translate-y-1 hover:border-[#8DBF44]/70 hover:shadow-[0_22px_64px_rgba(17,24,39,0.20)] sm:min-h-[410px] sm:rounded-[1.35rem] lg:min-h-[430px]"
-            >
-              <OptimizedImage
-                src={service.image}
-                alt=""
-                aria-hidden="true"
-                sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[620ms] group-hover:scale-[1.055]"
-              />
+          {services.map((service, index) => {
+            const isFirstRow = index < 3;
+
+            return (
+              <motion.div
+                key={service.title}
+                initial={{ y: 28 }}
+                whileInView={{ y: 0 }}
+                viewport={viewportOnce}
+                transition={{ delay: index * 0.04, duration: 0.38, ease: engineeredEase }}
+                className="group relative min-h-[335px] overflow-hidden rounded-[1.15rem] border border-white/10 bg-[#111827] shadow-[0_14px_38px_rgba(17,24,39,0.14)] ring-1 ring-[#24336A]/5 transition-all duration-[320ms] hover:-translate-y-1 hover:border-[#8DBF44]/70 hover:shadow-[0_22px_64px_rgba(17,24,39,0.20)] sm:min-h-[410px] sm:rounded-[1.35rem] lg:min-h-[430px]"
+              >
+                <OptimizedImage
+                  src={service.image}
+                  alt=""
+                  aria-hidden="true"
+                  sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+                  eager={isFirstRow}
+                  decoding={isFirstRow ? 'sync' : 'async'}
+                  className="absolute inset-0 h-full w-full transform-gpu object-cover transition-transform duration-[520ms] [backface-visibility:hidden] group-hover:scale-[1.035] md:duration-[620ms] md:group-hover:scale-[1.055]"
+                />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.20)_0%,rgba(17,24,39,0.38)_42%,rgba(17,24,39,0.86)_100%)] transition-opacity duration-300 group-hover:opacity-95" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(141,191,68,0.14)_0%,rgba(141,191,68,0.04)_28%,transparent_52%)] opacity-80" />
 
@@ -128,8 +172,9 @@ export default function ServicesSection() {
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.div

@@ -395,6 +395,30 @@
           "fallback": "/optimized/service-soil-testing-1920.jpg"
         }
       ]
+    },
+    "team-maxwell-changa-karinge.jpeg": {
+      "width": 720,
+      "height": 1080,
+      "format": "jpeg",
+      "variants": [
+        {
+          "width": 480,
+          "webp": "/optimized/team-maxwell-changa-karinge-480.webp",
+          "fallback": "/optimized/team-maxwell-changa-karinge-480.jpg"
+        }
+      ]
+    },
+    "team-pk-changachirere.jpeg": {
+      "width": 718,
+      "height": 1080,
+      "format": "jpeg",
+      "variants": [
+        {
+          "width": 480,
+          "webp": "/optimized/team-pk-changachirere-480.webp",
+          "fallback": "/optimized/team-pk-changachirere-480.jpg"
+        }
+      ]
     }
   },
   "videos": {

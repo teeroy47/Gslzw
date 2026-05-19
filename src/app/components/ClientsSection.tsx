@@ -1,12 +1,12 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import { useState } from 'react';
-import { ArrowUpRight, DraftingCompass, Sparkles } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, DraftingCompass, Sparkles } from 'lucide-react';
 import { companyProfile } from '../companyProfile';
 import { engineeredEase, viewportOnce } from '../motion';
 
 function getClientInitials(client: string) {
   return client
-    .replace(/['�]/g, '')
+    .replace(/['’]/g, '')
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
@@ -48,8 +48,14 @@ const projectLayouts = [
   'lg:col-span-3 lg:min-h-[270px]'
 ];
 
+const PROJECT_BATCH_SIZE = 8;
+
 export default function ClientsSection() {
   const [activeClient, setActiveClient] = useState<number | null>(0);
+  const [visibleProjectCount, setVisibleProjectCount] = useState(PROJECT_BATCH_SIZE);
+  const visibleProjects = companyProfile.projects.slice(0, visibleProjectCount);
+  const remainingProjects = Math.max(companyProfile.projects.length - visibleProjectCount, 0);
+  const hasMoreProjects = remainingProjects > 0;
 
   return (
     <section
@@ -201,14 +207,14 @@ export default function ClientsSection() {
           </div>
 
           <div className="relative z-10 grid gap-4 md:grid-cols-2 lg:grid-cols-12 lg:gap-5">
-            {companyProfile.projects.map((project, index) => (
+            {visibleProjects.map((project, index) => (
               <motion.article
                 key={project}
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewportOnce}
-                transition={{ delay: index * 0.045, duration: 0.38, ease: engineeredEase }}
-                className={`group relative flex min-h-[190px] overflow-hidden rounded-[1rem] border border-[#24336A]/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.96)_0%,rgba(244,246,250,0.92)_54%,rgba(238,238,238,0.82)_100%)] p-5 transition-all duration-[320ms] hover:-translate-y-1 hover:border-[#8DBF44]/55 hover:bg-white md:min-h-[220px] md:p-6 ${projectLayouts[index] ?? 'lg:col-span-4'}`}
+                transition={{ delay: (index % PROJECT_BATCH_SIZE) * 0.035, duration: 0.34, ease: engineeredEase }}
+                className={`group relative flex min-h-[190px] overflow-hidden rounded-[1rem] border border-[#24336A]/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.96)_0%,rgba(244,246,250,0.92)_54%,rgba(238,238,238,0.82)_100%)] p-5 transition-all duration-[320ms] hover:-translate-y-1 hover:border-[#8DBF44]/55 hover:bg-white md:min-h-[220px] md:p-6 ${projectLayouts[index % projectLayouts.length]}`}
               >
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
                 <div className="absolute bottom-0 left-0 h-px w-full bg-[#24336A]/10" />
@@ -226,7 +232,7 @@ export default function ClientsSection() {
                   <div className="flex items-start justify-between gap-5">
                     <div>
                       <div className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#8DBF44]">
-                        {projectDisciplines[index] ?? 'Engineering support'}
+                        {projectDisciplines[index % projectDisciplines.length]}
                       </div>
                       <div className="mt-2 h-px w-12 bg-[#24336A]/18 transition-all duration-300 group-hover:w-20 group-hover:bg-[#8DBF44]" />
                     </div>
@@ -241,7 +247,7 @@ export default function ClientsSection() {
                     </h4>
                     <div className="mt-5 flex items-center justify-between gap-4 border-t border-[#24336A]/10 pt-4">
                       <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#667085]">
-                        {projectContexts[index] ?? 'Civil works'}
+                        {projectContexts[index % projectContexts.length]}
                       </p>
                       <ArrowUpRight className="h-4 w-4 text-[#8DBF44] opacity-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
                     </div>
@@ -250,6 +256,36 @@ export default function ClientsSection() {
               </motion.article>
             ))}
           </div>
+
+          {hasMoreProjects && (
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewportOnce}
+              transition={{ duration: 0.34, ease: engineeredEase }}
+              className="relative z-10 mt-7 flex flex-col items-center gap-3 border-t border-[#24336A]/10 pt-7 text-center"
+            >
+              <p className="max-w-md text-sm leading-6 text-[#667085]">
+                Showing {visibleProjects.length} of {companyProfile.projects.length} selected works.
+                Reveal the archive in measured batches to keep the page easy to scan.
+              </p>
+              <button
+                type="button"
+                onClick={() =>
+                  setVisibleProjectCount((current) =>
+                    Math.min(current + PROJECT_BATCH_SIZE, companyProfile.projects.length)
+                  )
+                }
+                className="tap-press inline-flex min-h-12 items-center gap-2 rounded-full border border-[#24336A]/15 bg-white px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#24336A] shadow-[0_14px_34px_rgba(36,51,106,0.10)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#8DBF44]/60 hover:text-[#5D8F25] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#8DBF44]/25"
+              >
+                Read more works
+                <span className="rounded-full bg-[#8DBF44]/12 px-2 py-1 text-[#5D8F25]">
+                  +{Math.min(PROJECT_BATCH_SIZE, remainingProjects)}
+                </span>
+                <ChevronDown className="h-4 w-4" />
+              </button>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

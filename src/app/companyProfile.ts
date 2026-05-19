@@ -42,7 +42,7 @@ export const companyProfile = {
   },
   team: [
     {
-      name: 'Maxwell Changa Karinge',
+      name: 'Maxwell Changachirere Karinge',
       role: 'Managing Director',
       image: 'team-maxwell-changa-karinge.jpeg',
       summary:

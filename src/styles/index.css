@@ -10,11 +10,137 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  scroll-padding-bottom: calc(96px + env(safe-area-inset-bottom));
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
   overflow-x: hidden;
+  color: #24336A;
+  min-height: 100dvh;
+  overscroll-behavior-y: none;
+  text-rendering: geometricPrecision;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-micro: 220ms;
+  --motion-standard: 320ms;
+  --motion-cinematic: 460ms;
+}
+
+::selection {
+  background: rgba(141, 191, 68, 0.26);
+  color: #111827;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .type-display {
+    @apply font-display tracking-[-0.045em] leading-[0.96];
+  }
+
+  .type-kicker {
+    @apply font-mono text-[11px] font-bold uppercase tracking-[0.24em];
+  }
+
+  .type-body-refined {
+    @apply font-body leading-7 tracking-[-0.01em];
+  }
+
+  .motion-polished {
+    transition-duration: var(--motion-standard);
+    transition-timing-function: var(--motion-ease-out);
+  }
+}
+
+@layer utilities {
+  .ease-engineered {
+    transition-timing-function: var(--motion-ease-out);
+  }
+
+  .duration-engineered {
+    transition-duration: var(--motion-standard);
+  }
+}
+
+:where(a, button, input, textarea, select, [role='button']) {
+  transition-timing-function: var(--motion-ease-out);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(.transition, .transition-all, .transition-colors, .transition-opacity, .transition-transform) {
+  transition-timing-function: var(--motion-ease-out);
+}
+
+:where(img, video) {
+  max-width: 100%;
+}
+
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@layer utilities {
+  .safe-bottom-pad {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+
+  .safe-bottom-offset {
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+
+  .content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 760px;
+  }
+
+  .tap-press {
+    @apply active:scale-[0.985] active:brightness-[0.98];
+  }
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 96px;
+    scroll-padding-bottom: calc(112px + env(safe-area-inset-bottom));
+  }
+
+  body {
+    text-rendering: optimizeLegibility;
+  }
+
+  section {
+    scroll-margin-top: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Shimmer animation for buttons */
@@ -27,7 +153,4 @@ body {
   }
 }
 
-/* Smooth scrolling for anchor links */
-html {
-  scroll-padding-top: 80px;
-}
+/* Smooth scrolling for anchor links is configured on html above. */

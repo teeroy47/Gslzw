@@ -24,7 +24,7 @@ function Counter({ value, suffix = '' }: { value: number; suffix?: string }) {
   }, [isInView, count, value]);
 
   return (
-    <motion.span ref={ref} className="font-['Bebas_Neue'] text-7xl text-[#24336A]">
+    <motion.span ref={ref} className="font-impact text-7xl text-[#24336A]">
       {displayValue}
       {suffix}
     </motion.span>

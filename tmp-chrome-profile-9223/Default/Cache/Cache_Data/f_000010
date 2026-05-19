@@ -1,0 +1,553 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/app/components/ContactSection.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=5225445d"; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+let prevRefreshReg;
+let prevRefreshSig;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react can't detect preamble. Something is wrong."
+    );
+  }
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = RefreshRuntime.getRefreshReg("C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx");
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+}
+import { motion } from "/node_modules/.vite/deps/motion_react.js?v=5225445d";
+import { Clock, Linkedin, Mail, MapPin, MessageCircle, Phone } from "/node_modules/.vite/deps/lucide-react.js?v=5225445d";
+import { companyProfile } from "/src/app/companyProfile.ts";
+import { engineeredEase, viewportOnce } from "/src/app/motion.ts";
+const whatsappHref = (number) => `https://wa.me/${number.replace(/\D/g, "")}`;
+export default function ContactSection() {
+  return /* @__PURE__ */ jsxDEV("section", { id: "contact", className: "bg-[#F4F6FA] py-20 md:py-32", children: /* @__PURE__ */ jsxDEV("div", { className: "mx-auto max-w-[1280px] px-5 sm:px-6", children: /* @__PURE__ */ jsxDEV("div", { className: "grid gap-10 md:gap-16 lg:grid-cols-2", children: [
+    /* @__PURE__ */ jsxDEV(
+      motion.div,
+      {
+        initial: { opacity: 0, x: -40 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: viewportOnce,
+        transition: { duration: 0.42, ease: engineeredEase },
+        children: [
+          /* @__PURE__ */ jsxDEV("h2", { className: "mb-5 font-display text-[2.65rem] font-bold leading-[1] tracking-[-0.045em] text-[#24336A] md:mb-8 md:text-4xl", children: "Get in Touch" }, void 0, false, {
+            fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+            lineNumber: 38,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("p", { className: "mb-7 max-w-xl text-base leading-7 text-[#6B7280] md:mb-8", children: "Reach out for soil testing, foundation or pavement design input, binder distribution calibration, or broader project support. We operate from Norton and Harare and work across Zimbabwe." }, void 0, false, {
+            fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+            lineNumber: 39,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("form", { className: "space-y-5 md:space-y-6", children: [
+            /* @__PURE__ */ jsxDEV("div", { className: "grid gap-5 sm:grid-cols-2 md:gap-6", children: [
+              /* @__PURE__ */ jsxDEV("div", { children: [
+                /* @__PURE__ */ jsxDEV("label", { className: "mb-2 block font-medium text-[#24336A]", children: "Full Name" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 48,
+                  columnNumber: 19
+                }, this),
+                /* @__PURE__ */ jsxDEV(
+                  "input",
+                  {
+                    type: "text",
+                    className: "min-h-12 w-full rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none",
+                    placeholder: "John Doe"
+                  },
+                  void 0,
+                  false,
+                  {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 49,
+                    columnNumber: 19
+                  },
+                  this
+                )
+              ] }, void 0, true, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 47,
+                columnNumber: 17
+              }, this),
+              /* @__PURE__ */ jsxDEV("div", { children: [
+                /* @__PURE__ */ jsxDEV("label", { className: "mb-2 block font-medium text-[#24336A]", children: "Email" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 56,
+                  columnNumber: 19
+                }, this),
+                /* @__PURE__ */ jsxDEV(
+                  "input",
+                  {
+                    type: "email",
+                    className: "min-h-12 w-full rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none",
+                    placeholder: "john@example.com"
+                  },
+                  void 0,
+                  false,
+                  {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 57,
+                    columnNumber: 19
+                  },
+                  this
+                )
+              ] }, void 0, true, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 55,
+                columnNumber: 17
+              }, this)
+            ] }, void 0, true, {
+              fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+              lineNumber: 46,
+              columnNumber: 15
+            }, this),
+            /* @__PURE__ */ jsxDEV("div", { children: [
+              /* @__PURE__ */ jsxDEV("label", { className: "mb-2 block font-medium text-[#24336A]", children: "Phone" }, void 0, false, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 66,
+                columnNumber: 17
+              }, this),
+              /* @__PURE__ */ jsxDEV(
+                "input",
+                {
+                  type: "tel",
+                  className: "min-h-12 w-full rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none",
+                  placeholder: "+263 7xx xxx xxx"
+                },
+                void 0,
+                false,
+                {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 67,
+                  columnNumber: 17
+                },
+                this
+              )
+            ] }, void 0, true, {
+              fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+              lineNumber: 65,
+              columnNumber: 15
+            }, this),
+            /* @__PURE__ */ jsxDEV("div", { children: [
+              /* @__PURE__ */ jsxDEV("label", { className: "mb-2 block font-medium text-[#24336A]", children: "Service Required" }, void 0, false, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 75,
+                columnNumber: 17
+              }, this),
+              /* @__PURE__ */ jsxDEV("select", { className: "min-h-12 w-full rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none", children: [
+                /* @__PURE__ */ jsxDEV("option", { children: "Select a service..." }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 77,
+                  columnNumber: 19
+                }, this),
+                companyProfile.specialities.map(
+                  (service) => /* @__PURE__ */ jsxDEV("option", { children: service }, service, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 79,
+                    columnNumber: 19
+                  }, this)
+                ),
+                /* @__PURE__ */ jsxDEV("option", { children: "Quality Control Testing" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 81,
+                  columnNumber: 19
+                }, this)
+              ] }, void 0, true, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 76,
+                columnNumber: 17
+              }, this)
+            ] }, void 0, true, {
+              fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+              lineNumber: 74,
+              columnNumber: 15
+            }, this),
+            /* @__PURE__ */ jsxDEV("div", { children: [
+              /* @__PURE__ */ jsxDEV("label", { className: "mb-2 block font-medium text-[#24336A]", children: "Message" }, void 0, false, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 86,
+                columnNumber: 17
+              }, this),
+              /* @__PURE__ */ jsxDEV(
+                "textarea",
+                {
+                  rows: 5,
+                  className: "w-full resize-none rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none",
+                  placeholder: "Tell us about your project..."
+                },
+                void 0,
+                false,
+                {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 87,
+                  columnNumber: 17
+                },
+                this
+              )
+            ] }, void 0, true, {
+              fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+              lineNumber: 85,
+              columnNumber: 15
+            }, this),
+            /* @__PURE__ */ jsxDEV(
+              "button",
+              {
+                type: "submit",
+                className: "tap-press min-h-12 w-full rounded-lg bg-[#8DBF44] px-8 py-4 font-semibold text-[#24336A] transition-all duration-300 hover:scale-[1.015] hover:shadow-[0_12px_34px_rgba(141,191,68,0.32)]",
+                children: "Send Enquiry ->"
+              },
+              void 0,
+              false,
+              {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 94,
+                columnNumber: 15
+              },
+              this
+            )
+          ] }, void 0, true, {
+            fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+            lineNumber: 45,
+            columnNumber: 13
+          }, this)
+        ]
+      },
+      void 0,
+      true,
+      {
+        fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+        lineNumber: 32,
+        columnNumber: 11
+      },
+      this
+    ),
+    /* @__PURE__ */ jsxDEV(
+      motion.div,
+      {
+        initial: { opacity: 0, x: 40 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: viewportOnce,
+        transition: { duration: 0.42, ease: engineeredEase },
+        className: "space-y-7 md:space-y-8",
+        children: [
+          /* @__PURE__ */ jsxDEV("div", { children: [
+            /* @__PURE__ */ jsxDEV("h3", { className: "mb-6 font-display text-2xl font-bold text-[#24336A]", children: "Contact Information" }, void 0, false, {
+              fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+              lineNumber: 111,
+              columnNumber: 15
+            }, this),
+            /* @__PURE__ */ jsxDEV("div", { className: "space-y-6", children: [
+              /* @__PURE__ */ jsxDEV("div", { className: "flex gap-3.5 md:gap-4", children: [
+                /* @__PURE__ */ jsxDEV("div", { className: "flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#8DBF44]/10", children: /* @__PURE__ */ jsxDEV(MapPin, { className: "h-6 w-6 text-[#8DBF44]" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 118,
+                  columnNumber: 21
+                }, this) }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 117,
+                  columnNumber: 19
+                }, this),
+                /* @__PURE__ */ jsxDEV("div", { children: [
+                  /* @__PURE__ */ jsxDEV("div", { className: "mb-1 font-semibold text-[#24336A]", children: "Laboratory Address" }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 121,
+                    columnNumber: 21
+                  }, this),
+                  /* @__PURE__ */ jsxDEV("div", { className: "text-[#6B7280]", children: companyProfile.laboratoryAddress.join(", ") }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 122,
+                    columnNumber: 21
+                  }, this)
+                ] }, void 0, true, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 120,
+                  columnNumber: 19
+                }, this)
+              ] }, void 0, true, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 116,
+                columnNumber: 17
+              }, this),
+              /* @__PURE__ */ jsxDEV("div", { className: "flex gap-3.5 md:gap-4", children: [
+                /* @__PURE__ */ jsxDEV("div", { className: "flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#8DBF44]/10", children: /* @__PURE__ */ jsxDEV(MapPin, { className: "h-6 w-6 text-[#8DBF44]" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 128,
+                  columnNumber: 21
+                }, this) }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 127,
+                  columnNumber: 19
+                }, this),
+                /* @__PURE__ */ jsxDEV("div", { children: [
+                  /* @__PURE__ */ jsxDEV("div", { className: "mb-1 font-semibold text-[#24336A]", children: "Registered Office" }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 131,
+                    columnNumber: 21
+                  }, this),
+                  /* @__PURE__ */ jsxDEV("div", { className: "text-[#6B7280]", children: companyProfile.registeredOffice.join(", ") }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 132,
+                    columnNumber: 21
+                  }, this)
+                ] }, void 0, true, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 130,
+                  columnNumber: 19
+                }, this)
+              ] }, void 0, true, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 126,
+                columnNumber: 17
+              }, this),
+              /* @__PURE__ */ jsxDEV("div", { className: "flex gap-3.5 md:gap-4", children: [
+                /* @__PURE__ */ jsxDEV("div", { className: "flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#8DBF44]/10", children: /* @__PURE__ */ jsxDEV(Phone, { className: "h-6 w-6 text-[#8DBF44]" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 138,
+                  columnNumber: 21
+                }, this) }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 137,
+                  columnNumber: 19
+                }, this),
+                /* @__PURE__ */ jsxDEV("div", { children: [
+                  /* @__PURE__ */ jsxDEV("div", { className: "mb-1 font-semibold text-[#24336A]", children: "Phone (Calls Only)" }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 141,
+                    columnNumber: 21
+                  }, this),
+                  /* @__PURE__ */ jsxDEV("div", { className: "text-[#6B7280]", children: companyProfile.phones.join(" / ") }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 142,
+                    columnNumber: 21
+                  }, this)
+                ] }, void 0, true, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 140,
+                  columnNumber: 19
+                }, this)
+              ] }, void 0, true, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 136,
+                columnNumber: 17
+              }, this),
+              /* @__PURE__ */ jsxDEV("div", { className: "flex gap-3.5 md:gap-4", children: [
+                /* @__PURE__ */ jsxDEV("div", { className: "flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#8DBF44]/10", children: /* @__PURE__ */ jsxDEV(MessageCircle, { className: "h-6 w-6 text-[#8DBF44]" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 148,
+                  columnNumber: 21
+                }, this) }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 147,
+                  columnNumber: 19
+                }, this),
+                /* @__PURE__ */ jsxDEV("div", { children: [
+                  /* @__PURE__ */ jsxDEV("div", { className: "mb-1 font-semibold text-[#24336A]", children: "WhatsApp" }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 151,
+                    columnNumber: 21
+                  }, this),
+                  /* @__PURE__ */ jsxDEV("div", { className: "space-y-1 text-[#6B7280]", children: companyProfile.whatsappNumbers.map(
+                    (number) => /* @__PURE__ */ jsxDEV(
+                      "a",
+                      {
+                        href: whatsappHref(number),
+                        target: "_blank",
+                        rel: "noreferrer",
+                        className: "tap-press block min-h-8 transition-colors hover:text-[#8DBF44]",
+                        children: number
+                      },
+                      number,
+                      false,
+                      {
+                        fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                        lineNumber: 154,
+                        columnNumber: 23
+                      },
+                      this
+                    )
+                  ) }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 152,
+                    columnNumber: 21
+                  }, this)
+                ] }, void 0, true, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 150,
+                  columnNumber: 19
+                }, this)
+              ] }, void 0, true, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 146,
+                columnNumber: 17
+              }, this),
+              /* @__PURE__ */ jsxDEV("div", { className: "flex gap-3.5 md:gap-4", children: [
+                /* @__PURE__ */ jsxDEV("div", { className: "flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#8DBF44]/10", children: /* @__PURE__ */ jsxDEV(Mail, { className: "h-6 w-6 text-[#8DBF44]" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 170,
+                  columnNumber: 21
+                }, this) }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 169,
+                  columnNumber: 19
+                }, this),
+                /* @__PURE__ */ jsxDEV("div", { children: [
+                  /* @__PURE__ */ jsxDEV("div", { className: "mb-1 font-semibold text-[#24336A]", children: "Email" }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 173,
+                    columnNumber: 21
+                  }, this),
+                  /* @__PURE__ */ jsxDEV("div", { className: "space-y-1 text-[#6B7280]", children: companyProfile.emails.map(
+                    (email) => /* @__PURE__ */ jsxDEV("div", { children: email }, email, false, {
+                      fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                      lineNumber: 176,
+                      columnNumber: 23
+                    }, this)
+                  ) }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 174,
+                    columnNumber: 21
+                  }, this)
+                ] }, void 0, true, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 172,
+                  columnNumber: 19
+                }, this)
+              ] }, void 0, true, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 168,
+                columnNumber: 17
+              }, this),
+              /* @__PURE__ */ jsxDEV("div", { className: "flex gap-3.5 md:gap-4", children: [
+                /* @__PURE__ */ jsxDEV("div", { className: "flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#8DBF44]/10", children: /* @__PURE__ */ jsxDEV(Clock, { className: "h-6 w-6 text-[#8DBF44]" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 184,
+                  columnNumber: 21
+                }, this) }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 183,
+                  columnNumber: 19
+                }, this),
+                /* @__PURE__ */ jsxDEV("div", { children: [
+                  /* @__PURE__ */ jsxDEV("div", { className: "mb-1 font-semibold text-[#24336A]", children: "Business Hours" }, void 0, false, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 187,
+                    columnNumber: 21
+                  }, this),
+                  /* @__PURE__ */ jsxDEV("div", { className: "text-[#6B7280]", children: [
+                    "Monday - Friday: 8:00 AM - 5:00 PM",
+                    /* @__PURE__ */ jsxDEV("br", {}, void 0, false, {
+                      fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                      lineNumber: 190,
+                      columnNumber: 23
+                    }, this),
+                    "Saturday: 8:00 AM - 5:00 PM",
+                    /* @__PURE__ */ jsxDEV("br", {}, void 0, false, {
+                      fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                      lineNumber: 192,
+                      columnNumber: 23
+                    }, this),
+                    "Sunday: Closed"
+                  ] }, void 0, true, {
+                    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                    lineNumber: 188,
+                    columnNumber: 21
+                  }, this)
+                ] }, void 0, true, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 186,
+                  columnNumber: 19
+                }, this)
+              ] }, void 0, true, {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 182,
+                columnNumber: 17
+              }, this)
+            ] }, void 0, true, {
+              fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+              lineNumber: 115,
+              columnNumber: 15
+            }, this)
+          ] }, void 0, true, {
+            fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+            lineNumber: 110,
+            columnNumber: 13
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { children: [
+            /* @__PURE__ */ jsxDEV("h4", { className: "mb-4 font-semibold text-[#24336A]", children: "Connect With Us" }, void 0, false, {
+              fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+              lineNumber: 201,
+              columnNumber: 15
+            }, this),
+            /* @__PURE__ */ jsxDEV("div", { className: "flex gap-3", children: /* @__PURE__ */ jsxDEV(
+              "a",
+              {
+                href: "#contact",
+                "aria-label": "LinkedIn",
+                className: "tap-press flex h-12 w-12 items-center justify-center rounded-lg bg-[#24336A] transition-all duration-300 hover:scale-105 hover:bg-[#8DBF44]",
+                children: /* @__PURE__ */ jsxDEV(Linkedin, { className: "h-6 w-6 text-white" }, void 0, false, {
+                  fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                  lineNumber: 208,
+                  columnNumber: 19
+                }, this)
+              },
+              void 0,
+              false,
+              {
+                fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+                lineNumber: 203,
+                columnNumber: 17
+              },
+              this
+            ) }, void 0, false, {
+              fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+              lineNumber: 202,
+              columnNumber: 15
+            }, this)
+          ] }, void 0, true, {
+            fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+            lineNumber: 200,
+            columnNumber: 13
+          }, this)
+        ]
+      },
+      void 0,
+      true,
+      {
+        fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+        lineNumber: 103,
+        columnNumber: 11
+      },
+      this
+    )
+  ] }, void 0, true, {
+    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+    lineNumber: 31,
+    columnNumber: 9
+  }, this) }, void 0, false, {
+    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+    lineNumber: 30,
+    columnNumber: 7
+  }, this) }, void 0, false, {
+    fileName: "C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx",
+    lineNumber: 29,
+    columnNumber: 5
+  }, this);
+}
+_c = ContactSection;
+var _c;
+$RefreshReg$(_c, "ContactSection");
+if (import.meta.hot && !inWebWorker) {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+if (import.meta.hot && !inWebWorker) {
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/Teeroy/Documents/Gslzw/src/app/components/ContactSection.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+
+//# sourceMappingURL=data:application/json;base64,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O0FBQUE7QUFBQSx1QkFTQTtBQUFBLG1CQWJGO0FBQUE7QUFBQTtBQUFBO0FBQUEscUJBY0E7QUFBQSxpQkFqRkY7QUFBQTtBQUFBO0FBQUE7QUFBQSxtQkFrRkE7QUFBQSxlQXZGRjtBQUFBO0FBQUE7QUFBQTtBQUFBLGlCQXdGQTtBQUFBLFVBRUEsdUJBQUMsU0FDQztBQUFBLG1DQUFDLFFBQUcsV0FBVSxxQ0FBb0MsK0JBQWxEO0FBQUE7QUFBQTtBQUFBO0FBQUEsbUJBQWlFO0FBQUEsWUFDakUsdUJBQUMsU0FBSSxXQUFVLGNBQ2I7QUFBQSxjQUFDO0FBQUE7QUFBQSxnQkFDQyxNQUFLO0FBQUEsZ0JBQ0wsY0FBVztBQUFBLGdCQUNYLFdBQVU7QUFBQSxnQkFFVixpQ0FBQyxZQUFTLFdBQVUsd0JBQXBCO0FBQUE7QUFBQTtBQUFBO0FBQUEsdUJBQXdDO0FBQUE7QUFBQSxjQUwxQztBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsWUFNQSxLQVBGO0FBQUE7QUFBQTtBQUFBO0FBQUEsbUJBUUE7QUFBQSxlQVZGO0FBQUE7QUFBQTtBQUFBO0FBQUEsaUJBV0E7QUFBQTtBQUFBO0FBQUEsTUE1R0Y7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLElBNkdBO0FBQUEsT0FyTEY7QUFBQTtBQUFBO0FBQUE7QUFBQSxTQXNMQSxLQXZMRjtBQUFBO0FBQUE7QUFBQTtBQUFBLFNBd0xBLEtBekxGO0FBQUE7QUFBQTtBQUFBO0FBQUEsU0EwTEE7QUFFSjtBQUFDQyxLQTlMdUJmO0FBQWMsSUFBQWU7QUFBQSxhQUFBQSxJQUFBIiwibmFtZXMiOlsibW90aW9uIiwiQ2xvY2siLCJMaW5rZWRpbiIsIk1haWwiLCJNYXBQaW4iLCJNZXNzYWdlQ2lyY2xlIiwiUGhvbmUiLCJjb21wYW55UHJvZmlsZSIsImVuZ2luZWVyZWRFYXNlIiwidmlld3BvcnRPbmNlIiwid2hhdHNhcHBIcmVmIiwibnVtYmVyIiwicmVwbGFjZSIsIkNvbnRhY3RTZWN0aW9uIiwib3BhY2l0eSIsIngiLCJkdXJhdGlvbiIsImVhc2UiLCJzcGVjaWFsaXRpZXMiLCJtYXAiLCJzZXJ2aWNlIiwibGFib3JhdG9yeUFkZHJlc3MiLCJqb2luIiwicmVnaXN0ZXJlZE9mZmljZSIsInBob25lcyIsIndoYXRzYXBwTnVtYmVycyIsImVtYWlscyIsImVtYWlsIiwiX2MiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiQ29udGFjdFNlY3Rpb24udHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IG1vdGlvbiB9IGZyb20gJ21vdGlvbi9yZWFjdCc7XG5pbXBvcnQgeyBDbG9jaywgTGlua2VkaW4sIE1haWwsIE1hcFBpbiwgTWVzc2FnZUNpcmNsZSwgUGhvbmUgfSBmcm9tICdsdWNpZGUtcmVhY3QnO1xuaW1wb3J0IHsgY29tcGFueVByb2ZpbGUgfSBmcm9tICcuLi9jb21wYW55UHJvZmlsZSc7XG5pbXBvcnQgeyBlbmdpbmVlcmVkRWFzZSwgdmlld3BvcnRPbmNlIH0gZnJvbSAnLi4vbW90aW9uJztcblxuY29uc3Qgd2hhdHNhcHBIcmVmID0gKG51bWJlcjogc3RyaW5nKSA9PiBgaHR0cHM6Ly93YS5tZS8ke251bWJlci5yZXBsYWNlKC9cXEQvZywgJycpfWA7XG5cbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIENvbnRhY3RTZWN0aW9uKCkge1xuICByZXR1cm4gKFxuICAgIDxzZWN0aW9uIGlkPVwiY29udGFjdFwiIGNsYXNzTmFtZT1cImJnLVsjRjRGNkZBXSBweS0yMCBtZDpweS0zMlwiPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJteC1hdXRvIG1heC13LVsxMjgwcHhdIHB4LTUgc206cHgtNlwiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTEwIG1kOmdhcC0xNiBsZzpncmlkLWNvbHMtMlwiPlxuICAgICAgICAgIDxtb3Rpb24uZGl2XG4gICAgICAgICAgICBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHg6IC00MCB9fVxuICAgICAgICAgICAgd2hpbGVJblZpZXc9e3sgb3BhY2l0eTogMSwgeDogMCB9fVxuICAgICAgICAgICAgdmlld3BvcnQ9e3ZpZXdwb3J0T25jZX1cbiAgICAgICAgICAgIHRyYW5zaXRpb249e3sgZHVyYXRpb246IDAuNDIsIGVhc2U6IGVuZ2luZWVyZWRFYXNlIH19XG4gICAgICAgICAgPlxuICAgICAgICAgICAgPGgyIGNsYXNzTmFtZT1cIm1iLTUgZm9udC1kaXNwbGF5IHRleHQtWzIuNjVyZW1dIGZvbnQtYm9sZCBsZWFkaW5nLVsxXSB0cmFja2luZy1bLTAuMDQ1ZW1dIHRleHQtWyMyNDMzNkFdIG1kOm1iLTggbWQ6dGV4dC00eGxcIj5HZXQgaW4gVG91Y2g8L2gyPlxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwibWItNyBtYXgtdy14bCB0ZXh0LWJhc2UgbGVhZGluZy03IHRleHQtWyM2QjcyODBdIG1kOm1iLThcIj5cbiAgICAgICAgICAgICAgUmVhY2ggb3V0IGZvciBzb2lsIHRlc3RpbmcsIGZvdW5kYXRpb24gb3IgcGF2ZW1lbnQgZGVzaWduIGlucHV0LCBiaW5kZXIgZGlzdHJpYnV0aW9uXG4gICAgICAgICAgICAgIGNhbGlicmF0aW9uLCBvciBicm9hZGVyIHByb2plY3Qgc3VwcG9ydC4gV2Ugb3BlcmF0ZSBmcm9tIE5vcnRvbiBhbmQgSGFyYXJlIGFuZCB3b3JrXG4gICAgICAgICAgICAgIGFjcm9zcyBaaW1iYWJ3ZS5cbiAgICAgICAgICAgIDwvcD5cblxuICAgICAgICAgICAgPGZvcm0gY2xhc3NOYW1lPVwic3BhY2UteS01IG1kOnNwYWNlLXktNlwiPlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTUgc206Z3JpZC1jb2xzLTIgbWQ6Z2FwLTZcIj5cbiAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgPGxhYmVsIGNsYXNzTmFtZT1cIm1iLTIgYmxvY2sgZm9udC1tZWRpdW0gdGV4dC1bIzI0MzM2QV1cIj5GdWxsIE5hbWU8L2xhYmVsPlxuICAgICAgICAgICAgICAgICAgPGlucHV0XG4gICAgICAgICAgICAgICAgICAgIHR5cGU9XCJ0ZXh0XCJcbiAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwibWluLWgtMTIgdy1mdWxsIHJvdW5kZWQtbGcgYm9yZGVyIGJvcmRlci1bI2U1ZTdlYl0gYmctd2hpdGUgcHgtNSBweS00IHRleHQtYmFzZSB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi0zMDAgZm9jdXM6Ym9yZGVyLVsjOERCRjQ0XSBmb2N1czpzaGFkb3ctWzBfMF8wXzNweF9yZ2JhKDE0MSwxOTEsNjgsMC4yKV0gZm9jdXM6b3V0bGluZS1ub25lXCJcbiAgICAgICAgICAgICAgICAgICAgcGxhY2Vob2xkZXI9XCJKb2huIERvZVwiXG4gICAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3NOYW1lPVwibWItMiBibG9jayBmb250LW1lZGl1bSB0ZXh0LVsjMjQzMzZBXVwiPkVtYWlsPC9sYWJlbD5cbiAgICAgICAgICAgICAgICAgIDxpbnB1dFxuICAgICAgICAgICAgICAgICAgICB0eXBlPVwiZW1haWxcIlxuICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJtaW4taC0xMiB3LWZ1bGwgcm91bmRlZC1sZyBib3JkZXIgYm9yZGVyLVsjZTVlN2ViXSBiZy13aGl0ZSBweC01IHB5LTQgdGV4dC1iYXNlIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTMwMCBmb2N1czpib3JkZXItWyM4REJGNDRdIGZvY3VzOnNoYWRvdy1bMF8wXzBfM3B4X3JnYmEoMTQxLDE5MSw2OCwwLjIpXSBmb2N1czpvdXRsaW5lLW5vbmVcIlxuICAgICAgICAgICAgICAgICAgICBwbGFjZWhvbGRlcj1cImpvaG5AZXhhbXBsZS5jb21cIlxuICAgICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3NOYW1lPVwibWItMiBibG9jayBmb250LW1lZGl1bSB0ZXh0LVsjMjQzMzZBXVwiPlBob25lPC9sYWJlbD5cbiAgICAgICAgICAgICAgICA8aW5wdXRcbiAgICAgICAgICAgICAgICAgIHR5cGU9XCJ0ZWxcIlxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwibWluLWgtMTIgdy1mdWxsIHJvdW5kZWQtbGcgYm9yZGVyIGJvcmRlci1bI2U1ZTdlYl0gYmctd2hpdGUgcHgtNSBweS00IHRleHQtYmFzZSB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi0zMDAgZm9jdXM6Ym9yZGVyLVsjOERCRjQ0XSBmb2N1czpzaGFkb3ctWzBfMF8wXzNweF9yZ2JhKDE0MSwxOTEsNjgsMC4yKV0gZm9jdXM6b3V0bGluZS1ub25lXCJcbiAgICAgICAgICAgICAgICAgIHBsYWNlaG9sZGVyPVwiKzI2MyA3eHggeHh4IHh4eFwiXG4gICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICA8bGFiZWwgY2xhc3NOYW1lPVwibWItMiBibG9jayBmb250LW1lZGl1bSB0ZXh0LVsjMjQzMzZBXVwiPlNlcnZpY2UgUmVxdWlyZWQ8L2xhYmVsPlxuICAgICAgICAgICAgICAgIDxzZWxlY3QgY2xhc3NOYW1lPVwibWluLWgtMTIgdy1mdWxsIHJvdW5kZWQtbGcgYm9yZGVyIGJvcmRlci1bI2U1ZTdlYl0gYmctd2hpdGUgcHgtNSBweS00IHRleHQtYmFzZSB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi0zMDAgZm9jdXM6Ym9yZGVyLVsjOERCRjQ0XSBmb2N1czpzaGFkb3ctWzBfMF8wXzNweF9yZ2JhKDE0MSwxOTEsNjgsMC4yKV0gZm9jdXM6b3V0bGluZS1ub25lXCI+XG4gICAgICAgICAgICAgICAgICA8b3B0aW9uPlNlbGVjdCBhIHNlcnZpY2UuLi48L29wdGlvbj5cbiAgICAgICAgICAgICAgICAgIHtjb21wYW55UHJvZmlsZS5zcGVjaWFsaXRpZXMubWFwKChzZXJ2aWNlKSA9PiAoXG4gICAgICAgICAgICAgICAgICAgIDxvcHRpb24ga2V5PXtzZXJ2aWNlfT57c2VydmljZX08L29wdGlvbj5cbiAgICAgICAgICAgICAgICAgICkpfVxuICAgICAgICAgICAgICAgICAgPG9wdGlvbj5RdWFsaXR5IENvbnRyb2wgVGVzdGluZzwvb3B0aW9uPlxuICAgICAgICAgICAgICAgIDwvc2VsZWN0PlxuICAgICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgIDxsYWJlbCBjbGFzc05hbWU9XCJtYi0yIGJsb2NrIGZvbnQtbWVkaXVtIHRleHQtWyMyNDMzNkFdXCI+TWVzc2FnZTwvbGFiZWw+XG4gICAgICAgICAgICAgICAgPHRleHRhcmVhXG4gICAgICAgICAgICAgICAgICByb3dzPXs1fVxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidy1mdWxsIHJlc2l6ZS1ub25lIHJvdW5kZWQtbGcgYm9yZGVyIGJvcmRlci1bI2U1ZTdlYl0gYmctd2hpdGUgcHgtNSBweS00IHRleHQtYmFzZSB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi0zMDAgZm9jdXM6Ym9yZGVyLVsjOERCRjQ0XSBmb2N1czpzaGFkb3ctWzBfMF8wXzNweF9yZ2JhKDE0MSwxOTEsNjgsMC4yKV0gZm9jdXM6b3V0bGluZS1ub25lXCJcbiAgICAgICAgICAgICAgICAgIHBsYWNlaG9sZGVyPVwiVGVsbCB1cyBhYm91dCB5b3VyIHByb2plY3QuLi5cIlxuICAgICAgICAgICAgICAgIC8+XG4gICAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICAgIDxidXR0b25cbiAgICAgICAgICAgICAgICB0eXBlPVwic3VibWl0XCJcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJ0YXAtcHJlc3MgbWluLWgtMTIgdy1mdWxsIHJvdW5kZWQtbGcgYmctWyM4REJGNDRdIHB4LTggcHktNCBmb250LXNlbWlib2xkIHRleHQtWyMyNDMzNkFdIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTMwMCBob3ZlcjpzY2FsZS1bMS4wMTVdIGhvdmVyOnNoYWRvdy1bMF8xMnB4XzM0cHhfcmdiYSgxNDEsMTkxLDY4LDAuMzIpXVwiXG4gICAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgICB7J1NlbmQgRW5xdWlyeSAtPid9XG4gICAgICAgICAgICAgIDwvYnV0dG9uPlxuICAgICAgICAgICAgPC9mb3JtPlxuICAgICAgICAgIDwvbW90aW9uLmRpdj5cblxuICAgICAgICAgIDxtb3Rpb24uZGl2XG4gICAgICAgICAgICBpbml0aWFsPXt7IG9wYWNpdHk6IDAsIHg6IDQwIH19XG4gICAgICAgICAgICB3aGlsZUluVmlldz17eyBvcGFjaXR5OiAxLCB4OiAwIH19XG4gICAgICAgICAgICB2aWV3cG9ydD17dmlld3BvcnRPbmNlfVxuICAgICAgICAgICAgdHJhbnNpdGlvbj17eyBkdXJhdGlvbjogMC40MiwgZWFzZTogZW5naW5lZXJlZEVhc2UgfX1cbiAgICAgICAgICAgIGNsYXNzTmFtZT1cInNwYWNlLXktNyBtZDpzcGFjZS15LThcIlxuICAgICAgICAgID5cbiAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9XCJtYi02IGZvbnQtZGlzcGxheSB0ZXh0LTJ4bCBmb250LWJvbGQgdGV4dC1bIzI0MzM2QV1cIj5cbiAgICAgICAgICAgICAgICBDb250YWN0IEluZm9ybWF0aW9uXG4gICAgICAgICAgICAgIDwvaDM+XG5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTZcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZ2FwLTMuNSBtZDpnYXAtNFwiPlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGgtMTIgdy0xMiBmbGV4LXNocmluay0wIGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciByb3VuZGVkLWxnIGJnLVsjOERCRjQ0XS8xMFwiPlxuICAgICAgICAgICAgICAgICAgICA8TWFwUGluIGNsYXNzTmFtZT1cImgtNiB3LTYgdGV4dC1bIzhEQkY0NF1cIiAvPlxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTEgZm9udC1zZW1pYm9sZCB0ZXh0LVsjMjQzMzZBXVwiPkxhYm9yYXRvcnkgQWRkcmVzczwvZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtWyM2QjcyODBdXCI+e2NvbXBhbnlQcm9maWxlLmxhYm9yYXRvcnlBZGRyZXNzLmpvaW4oJywgJyl9PC9kaXY+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBnYXAtMy41IG1kOmdhcC00XCI+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaC0xMiB3LTEyIGZsZXgtc2hyaW5rLTAgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtbGcgYmctWyM4REJGNDRdLzEwXCI+XG4gICAgICAgICAgICAgICAgICAgIDxNYXBQaW4gY2xhc3NOYW1lPVwiaC02IHctNiB0ZXh0LVsjOERCRjQ0XVwiIC8+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWItMSBmb250LXNlbWlib2xkIHRleHQtWyMyNDMzNkFdXCI+UmVnaXN0ZXJlZCBPZmZpY2U8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LVsjNkI3MjgwXVwiPntjb21wYW55UHJvZmlsZS5yZWdpc3RlcmVkT2ZmaWNlLmpvaW4oJywgJyl9PC9kaXY+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBnYXAtMy41IG1kOmdhcC00XCI+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaC0xMiB3LTEyIGZsZXgtc2hyaW5rLTAgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtbGcgYmctWyM4REJGNDRdLzEwXCI+XG4gICAgICAgICAgICAgICAgICAgIDxQaG9uZSBjbGFzc05hbWU9XCJoLTYgdy02IHRleHQtWyM4REJGNDRdXCIgLz5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYi0xIGZvbnQtc2VtaWJvbGQgdGV4dC1bIzI0MzM2QV1cIj5QaG9uZSAoQ2FsbHMgT25seSk8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJ0ZXh0LVsjNkI3MjgwXVwiPntjb21wYW55UHJvZmlsZS5waG9uZXMuam9pbignIC8gJyl9PC9kaXY+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBnYXAtMy41IG1kOmdhcC00XCI+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaC0xMiB3LTEyIGZsZXgtc2hyaW5rLTAgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtbGcgYmctWyM4REJGNDRdLzEwXCI+XG4gICAgICAgICAgICAgICAgICAgIDxNZXNzYWdlQ2lyY2xlIGNsYXNzTmFtZT1cImgtNiB3LTYgdGV4dC1bIzhEQkY0NF1cIiAvPlxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTEgZm9udC1zZW1pYm9sZCB0ZXh0LVsjMjQzMzZBXVwiPldoYXRzQXBwPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0xIHRleHQtWyM2QjcyODBdXCI+XG4gICAgICAgICAgICAgICAgICAgICAge2NvbXBhbnlQcm9maWxlLndoYXRzYXBwTnVtYmVycy5tYXAoKG51bWJlcikgPT4gKFxuICAgICAgICAgICAgICAgICAgICAgICAgPGFcbiAgICAgICAgICAgICAgICAgICAgICAgICAga2V5PXtudW1iZXJ9XG4gICAgICAgICAgICAgICAgICAgICAgICAgIGhyZWY9e3doYXRzYXBwSHJlZihudW1iZXIpfVxuICAgICAgICAgICAgICAgICAgICAgICAgICB0YXJnZXQ9XCJfYmxhbmtcIlxuICAgICAgICAgICAgICAgICAgICAgICAgICByZWw9XCJub3JlZmVycmVyXCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwidGFwLXByZXNzIGJsb2NrIG1pbi1oLTggdHJhbnNpdGlvbi1jb2xvcnMgaG92ZXI6dGV4dC1bIzhEQkY0NF1cIlxuICAgICAgICAgICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgICAgICAgICB7bnVtYmVyfVxuICAgICAgICAgICAgICAgICAgICAgICAgPC9hPlxuICAgICAgICAgICAgICAgICAgICAgICkpfVxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGdhcC0zLjUgbWQ6Z2FwLTRcIj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBoLTEyIHctMTIgZmxleC1zaHJpbmstMCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcm91bmRlZC1sZyBiZy1bIzhEQkY0NF0vMTBcIj5cbiAgICAgICAgICAgICAgICAgICAgPE1haWwgY2xhc3NOYW1lPVwiaC02IHctNiB0ZXh0LVsjOERCRjQ0XVwiIC8+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWItMSBmb250LXNlbWlib2xkIHRleHQtWyMyNDMzNkFdXCI+RW1haWw8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTEgdGV4dC1bIzZCNzI4MF1cIj5cbiAgICAgICAgICAgICAgICAgICAgICB7Y29tcGFueVByb2ZpbGUuZW1haWxzLm1hcCgoZW1haWwpID0+IChcbiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYga2V5PXtlbWFpbH0+e2VtYWlsfTwvZGl2PlxuICAgICAgICAgICAgICAgICAgICAgICkpfVxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGdhcC0zLjUgbWQ6Z2FwLTRcIj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBoLTEyIHctMTIgZmxleC1zaHJpbmstMCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcm91bmRlZC1sZyBiZy1bIzhEQkY0NF0vMTBcIj5cbiAgICAgICAgICAgICAgICAgICAgPENsb2NrIGNsYXNzTmFtZT1cImgtNiB3LTYgdGV4dC1bIzhEQkY0NF1cIiAvPlxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTEgZm9udC1zZW1pYm9sZCB0ZXh0LVsjMjQzMzZBXVwiPkJ1c2luZXNzIEhvdXJzPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1bIzZCNzI4MF1cIj5cbiAgICAgICAgICAgICAgICAgICAgICBNb25kYXkgLSBGcmlkYXk6IDg6MDAgQU0gLSA1OjAwIFBNXG4gICAgICAgICAgICAgICAgICAgICAgPGJyIC8+XG4gICAgICAgICAgICAgICAgICAgICAgU2F0dXJkYXk6IDg6MDAgQU0gLSA1OjAwIFBNXG4gICAgICAgICAgICAgICAgICAgICAgPGJyIC8+XG4gICAgICAgICAgICAgICAgICAgICAgU3VuZGF5OiBDbG9zZWRcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgPGg0IGNsYXNzTmFtZT1cIm1iLTQgZm9udC1zZW1pYm9sZCB0ZXh0LVsjMjQzMzZBXVwiPkNvbm5lY3QgV2l0aCBVczwvaDQ+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBnYXAtM1wiPlxuICAgICAgICAgICAgICAgIDxhXG4gICAgICAgICAgICAgICAgICBocmVmPVwiI2NvbnRhY3RcIlxuICAgICAgICAgICAgICAgICAgYXJpYS1sYWJlbD1cIkxpbmtlZEluXCJcbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInRhcC1wcmVzcyBmbGV4IGgtMTIgdy0xMiBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcm91bmRlZC1sZyBiZy1bIzI0MzM2QV0gdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwIGhvdmVyOnNjYWxlLTEwNSBob3ZlcjpiZy1bIzhEQkY0NF1cIlxuICAgICAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgICAgIDxMaW5rZWRpbiBjbGFzc05hbWU9XCJoLTYgdy02IHRleHQtd2hpdGVcIiAvPlxuICAgICAgICAgICAgICAgIDwvYT5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L21vdGlvbi5kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgPC9zZWN0aW9uPlxuICApO1xufVxuIl0sImZpbGUiOiJDOi9Vc2Vycy9UZWVyb3kvRG9jdW1lbnRzL0dzbHp3L3NyYy9hcHAvY29tcG9uZW50cy9Db250YWN0U2VjdGlvbi50c3gifQ==

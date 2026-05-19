@@ -1,6 +1,8 @@
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { companyProfile } from '../companyProfile';
 import GslLogo from './GslLogo';
+
+const whatsappHref = (number: string) => `https://wa.me/${number.replace(/\D/g, '')}`;
 
 export default function Footer() {
   return (
@@ -18,7 +20,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 font-['Syne'] text-lg font-bold">Core Services</h4>
+            <h4 className="mb-4 font-display text-lg font-bold">Core Services</h4>
             <ul className="space-y-3">
               {companyProfile.specialities.map((service) => (
                 <li key={service}>
@@ -31,7 +33,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 font-['Syne'] text-lg font-bold">Company</h4>
+            <h4 className="mb-4 font-display text-lg font-bold">Company</h4>
             <ul className="space-y-3 text-sm text-white/60">
               <li>Founded in {companyProfile.foundedYear}</li>
               <li>Based in {companyProfile.bases.join(' and ')}</li>
@@ -42,7 +44,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 font-['Syne'] text-lg font-bold">Contact</h4>
+            <h4 className="mb-4 font-display text-lg font-bold">Contact</h4>
             <ul className="space-y-4">
               <li className="flex gap-3">
                 <MapPin className="h-5 w-5 flex-shrink-0 text-[#8DBF44]" />
@@ -50,7 +52,23 @@ export default function Footer() {
               </li>
               <li className="flex gap-3">
                 <Phone className="h-5 w-5 flex-shrink-0 text-[#8DBF44]" />
-                <span className="text-sm text-white/60">{companyProfile.phones.join(' / ')}</span>
+                <span className="text-sm text-white/60">{companyProfile.phones.join(' / ')} (calls only)</span>
+              </li>
+              <li className="flex gap-3">
+                <MessageCircle className="h-5 w-5 flex-shrink-0 text-[#8DBF44]" />
+                <span className="space-y-1 text-sm text-white/60">
+                  {companyProfile.whatsappNumbers.map((number) => (
+                    <a
+                      key={number}
+                      href={whatsappHref(number)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block transition-colors hover:text-[#8DBF44]"
+                    >
+                      {number}
+                    </a>
+                  ))}
+                </span>
               </li>
               <li className="flex gap-3">
                 <Mail className="h-5 w-5 flex-shrink-0 text-[#8DBF44]" />

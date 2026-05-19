@@ -50,7 +50,7 @@ function TestimonialCard({
     <article className="relative rounded-[20px] border border-white/10 bg-white/7 p-10 backdrop-blur-xl">
       <Quote className="absolute left-8 top-8 h-14 w-14 text-[#8DBF44] opacity-70" />
 
-      <p className="relative z-10 mb-8 pl-10 font-['DM_Sans'] text-[17px] leading-7 text-white/85">
+      <p className="relative z-10 mb-8 pl-10 font-body text-[17px] leading-7 text-white/85">
         "{quote}"
       </p>
 
@@ -60,8 +60,8 @@ function TestimonialCard({
         ))}
       </div>
 
-      <div className="font-['Syne'] text-base font-semibold text-white">{author}</div>
-      <div className="font-['DM_Sans'] text-[13px] text-white/50">
+      <div className="font-display text-base font-semibold text-white">{author}</div>
+      <div className="font-body text-[13px] text-white/50">
         {role} - {company}
       </div>
     </article>
@@ -95,7 +95,7 @@ export default function Testimonials() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="mb-16 text-center font-['Syne'] text-5xl font-bold text-white"
+          className="mb-16 text-center font-display text-5xl font-bold text-white"
         >
           What Our Clients Say
         </motion.h2>

@@ -2,16 +2,16 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { companyProfile } from '../companyProfile';
+import { engineeredEase } from '../motion';
+import { OptimizedImage, OptimizedVideo } from './OptimizedMedia';
 import { StarButton } from './StarButton';
 import { Typewriter } from './Typewriter';
 
-const assetBase = import.meta.env.BASE_URL;
-
 const heroBackgroundImages = [
-  `${assetBase}hero-slide-1.jpg`,
-  `${assetBase}hero-slide-2.jpg`,
-  `${assetBase}hero-slide-3.jpg`,
-  `${assetBase}hero-slide-4.jpg`
+  'hero-slide-1.jpg',
+  'hero-slide-2.jpg',
+  'hero-slide-3.jpg',
+  'hero-slide-4.jpg'
 ];
 
 const transitionVariants = {
@@ -26,9 +26,8 @@ const transitionVariants = {
       filter: 'blur(0px)',
       y: 0,
       transition: {
-        type: 'spring',
-        bounce: 0.3,
-        duration: 1.5
+        duration: 0.72,
+        ease: engineeredEase
       }
     }
   }
@@ -78,31 +77,33 @@ export default function HeroSection() {
     <main className="relative overflow-hidden">
       <div className="absolute inset-0 z-0 overflow-hidden">
         {isMobile ? (
-          <img
+          <OptimizedImage
             src={heroBackgroundImages[0]}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
+            sizes="100vw"
+            eager
           />
         ) : (
           <AnimatePresence mode="wait">
-            <motion.img
+            <motion.div
               key={heroBackgroundImages[activeBackground]}
-              src={heroBackgroundImages[activeBackground]}
-              alt=""
-              aria-hidden="true"
               className="absolute inset-0 h-full w-full object-cover"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 2, ease: 'easeInOut' }}
-            />
+              transition={{ duration: 1.15, ease: engineeredEase }}
+            >
+              <OptimizedImage
+                src={heroBackgroundImages[activeBackground]}
+                alt=""
+                aria-hidden="true"
+                className="h-full w-full object-cover"
+                sizes="100vw"
+                eager
+              />
+            </motion.div>
           </AnimatePresence>
         )}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.16)_0%,rgba(36,51,106,0.34)_36%,rgba(17,24,39,0.54)_100%)]" />
@@ -121,7 +122,7 @@ export default function HeroSection() {
       <section className="relative z-10">
         <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(17,24,39,0.06)_0%,rgba(36,51,106,0.14)_42%,rgba(17,24,39,0.32)_100%)]" />
         <div className="absolute inset-0 z-0 size-full bg-[radial-gradient(125%_125%_at_50%_100%,transparent_0%,rgba(36,51,106,0.08)_55%,rgba(17,24,39,0.36)_100%)]" />
-        <div className="relative z-10 pt-28 md:pt-36">
+        <div className="relative z-10 pt-24 pb-14 sm:pt-28 md:pt-36 md:pb-0">
           <div className="mx-auto max-w-7xl px-6">
             <div className="text-center">
               <motion.div
@@ -141,9 +142,9 @@ export default function HeroSection() {
               >
                 <a
                   href="#contact"
-                  className="mx-auto flex w-fit items-center gap-4 rounded-full border border-white/14 bg-brand-navy/42 p-1 pl-4 shadow-md shadow-black/20 backdrop-blur-md transition-all duration-300 hover:bg-brand-navy/58"
+                  className="tap-press mx-auto flex w-fit max-w-full items-center gap-3 rounded-full border border-white/14 bg-brand-navy/48 p-1 pl-4 shadow-md shadow-black/20 backdrop-blur-md transition-all duration-300 hover:bg-brand-navy/58"
                 >
-                  <span className="text-sm text-white/88">
+                  <span className="text-left text-xs leading-5 text-white/88 sm:text-sm">
                     {companyProfile.motto}
                   </span>
                   <span className="block h-4 w-px bg-white/15" />
@@ -154,11 +155,11 @@ export default function HeroSection() {
 
                 <motion.h1
                   variants={transitionVariants.item}
-                  className="mx-auto mt-8 max-w-5xl text-balance font-display text-5xl font-extrabold leading-[0.98] tracking-[-0.04em] text-white md:text-7xl xl:text-[5.15rem]"
+                  className="mx-auto mt-7 max-w-5xl text-balance font-display text-[3.05rem] font-extrabold leading-[0.94] tracking-[-0.045em] text-white sm:text-6xl md:mt-8 md:text-7xl md:leading-[0.98] xl:text-[5.15rem]"
                 >
                   <span className="block">Reliable Civil Engineering</span>
                   <span className="block">Testing And</span>
-                  <span className="block min-h-[1.2em] text-brand-lime">
+                  <span className="mx-auto block min-h-[2.25em] text-brand-lime sm:min-h-[1.2em]">
                     <Typewriter
                       words={[
                         'Ground Investigation Support.',
@@ -174,7 +175,7 @@ export default function HeroSection() {
 
                 <motion.p
                   variants={transitionVariants.item}
-                  className="mx-auto mt-8 max-w-3xl text-balance text-lg leading-8 text-white/74"
+                  className="mx-auto mt-6 max-w-3xl text-balance text-base leading-7 text-white/76 sm:text-lg md:mt-8 md:leading-8"
                 >
                   {companyProfile.shortName} provides soil testing, foundation and pavement design,
                   binder distribution calibration, and project management support for infrastructure,
@@ -196,7 +197,7 @@ export default function HeroSection() {
                   },
                   ...transitionVariants
                 }}
-                className="mt-12 flex flex-col items-center justify-center gap-3 md:flex-row"
+                className="mt-9 flex flex-col items-center justify-center gap-3 md:mt-12 md:flex-row"
               >
                 <motion.div variants={transitionVariants.item} className="rounded-[14px] border border-white/10 bg-white/8 p-0.5">
                   <StarButton
@@ -228,21 +229,21 @@ export default function HeroSection() {
               ...transitionVariants
             }}
           >
-            <div className="relative -mr-56 mt-10 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
+            <div className="relative mt-10 overflow-hidden px-3 sm:mt-12 md:mt-20 md:px-2">
               <div aria-hidden className="absolute inset-0 z-10 bg-gradient-to-b from-transparent from-35% to-brand-navy" />
-              <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[28px] border border-white/10 bg-white/6 p-4 shadow-[0_30px_80px_rgba(0,0,0,0.35)] ring-1 ring-white/10">
-                <div className="grid gap-4 lg:grid-cols-[1.2fr_.8fr]">
+              <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[22px] border border-white/10 bg-white/7 p-2.5 shadow-[0_20px_52px_rgba(0,0,0,0.28)] ring-1 ring-white/10 sm:rounded-[28px] sm:p-4 md:shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+                <div className="grid gap-3 sm:gap-4 lg:grid-cols-[1.2fr_.8fr]">
                   <div className="relative overflow-hidden rounded-2xl border border-white/10">
                     {isMobile ? (
-                      <img
+                      <OptimizedImage
                         src={heroBackgroundImages[0]}
                         alt="Civil engineering site overview"
-                        className="aspect-[15/10] w-full object-cover"
-                        loading="lazy"
-                        decoding="async"
+                        className="aspect-[4/3] w-full object-cover sm:aspect-[15/10]"
+                        sizes="(min-width: 1024px) 680px, 100vw"
                       />
                     ) : (
-                      <video
+                      <OptimizedVideo
+                        src="hero-background.mp4"
                         ref={heroVideoRef}
                         autoPlay
                         muted
@@ -250,17 +251,15 @@ export default function HeroSection() {
                         playsInline
                         preload="metadata"
                         className="aspect-[15/10] w-full object-cover"
-                      >
-                        <source src={`${assetBase}hero-background.mp4`} type="video/mp4" />
-                      </video>
+                      />
                     )}
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(36,51,106,0.06)_0%,rgba(17,24,39,0.24)_100%)]" />
                   </div>
 
-                  <div className="flex flex-col justify-between rounded-2xl border border-white/10 bg-[#1A2553] p-6 text-left text-white">
+                  <div className="flex flex-col justify-between rounded-2xl border border-white/10 bg-[#1A2553] p-5 text-left text-white sm:p-6">
                     <div>
                       <p className="text-xs uppercase tracking-[0.22em] text-brand-lime">Company profile</p>
-                      <h3 className="mt-3 font-display text-3xl font-bold leading-tight">
+                      <h3 className="mt-3 font-display text-[1.85rem] font-bold leading-[1.02] tracking-[-0.035em] sm:text-3xl">
                         Grounded in experience. Structured for dependable delivery.
                       </h3>
                       <p className="mt-4 text-sm leading-7 text-white/72">
@@ -270,27 +269,27 @@ export default function HeroSection() {
                       </p>
                     </div>
 
-                    <div className="mt-8 grid grid-cols-2 gap-3">
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <div className="font-impact text-4xl text-brand-lime">2006</div>
+                    <div className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-8 sm:gap-3">
+                      <div className="rounded-2xl bg-white/6 p-3.5 sm:p-4">
+                        <div className="font-impact text-3xl text-brand-lime sm:text-4xl">2006</div>
                         <div className="mt-1 text-xs uppercase tracking-[0.18em] text-white/55">
                           Founded
                         </div>
                       </div>
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <div className="font-impact text-4xl text-brand-lime">35+</div>
+                      <div className="rounded-2xl bg-white/6 p-3.5 sm:p-4">
+                        <div className="font-impact text-3xl text-brand-lime sm:text-4xl">35+</div>
                         <div className="mt-1 text-xs uppercase tracking-[0.18em] text-white/55">
                           Leadership years
                         </div>
                       </div>
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <div className="font-impact text-4xl text-brand-lime">10</div>
+                      <div className="rounded-2xl bg-white/6 p-3.5 sm:p-4">
+                        <div className="font-impact text-3xl text-brand-lime sm:text-4xl">10</div>
                         <div className="mt-1 text-xs uppercase tracking-[0.18em] text-white/55">
                           Team members
                         </div>
                       </div>
-                      <div className="rounded-2xl bg-white/6 p-4">
-                        <div className="font-impact text-4xl text-brand-lime">2</div>
+                      <div className="rounded-2xl bg-white/6 p-3.5 sm:p-4">
+                        <div className="font-impact text-3xl text-brand-lime sm:text-4xl">2</div>
                         <div className="mt-1 text-xs uppercase tracking-[0.18em] text-white/55">
                           Operating bases
                         </div>

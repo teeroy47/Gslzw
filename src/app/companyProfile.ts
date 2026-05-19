@@ -11,7 +11,8 @@ export const companyProfile = {
     'Binder distribution calibration',
     'Project management'
   ],
-  phones: ['+263 775 988 807', '+263 733 778 119'],
+  phones: ['+263 775 988 807'],
+  whatsappNumbers: ['+263 71 820 7476', '+263 71 820 8400'],
   emails: [
     'geosciencelaboratory@gmail.com',
     'karingemaxwell@gmail.com'

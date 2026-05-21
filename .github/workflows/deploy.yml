@@ -64,7 +64,7 @@ jobs:
           curl -k -sS --fail \
             -H "Authorization: cpanel ${CPANEL_USERNAME}:${CPANEL_TOKEN}" \
             -F "dir=${CPANEL_TARGET_DIR}" \
-            -F "file-1=@${DEPLOY_ARCHIVE}" \
+            -F "file=@${DEPLOY_ARCHIVE};filename=${DEPLOY_ARCHIVE}" \
             "https://${CPANEL_HOST}:2083/execute/Fileman/upload_files" \
             -o upload-response.json
 

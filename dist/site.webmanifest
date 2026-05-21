@@ -1,13 +1,13 @@
 {
   "name": "Geosciencelab",
   "short_name": "Geosciencelab",
-  "start_url": "/Gslzw/",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#24336A",
   "theme_color": "#24336A",
   "icons": [
     {
-      "src": "/Gslzw/gsl-logo.png",
+      "src": "/gsl-logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

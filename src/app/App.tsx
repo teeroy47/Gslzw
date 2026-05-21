@@ -8,6 +8,7 @@ import ClientsSection from './components/ClientsSection';
 import TechnologySection from './components/TechnologySection';
 import CTASection from './components/CTASection';
 import ContactSection from './components/ContactSection';
+import LocationMapSection from './components/LocationMapSection';
 import Footer from './components/Footer';
 import { prewarmOptimizedImages } from './components/OptimizedMedia';
 
@@ -47,6 +48,7 @@ export default function App() {
         <ClientsSection />
         <TechnologySection />
         <CTASection />
+        <LocationMapSection />
         <ContactSection />
       </main>
       <Footer />

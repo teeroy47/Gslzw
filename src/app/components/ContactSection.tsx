@@ -1,11 +1,50 @@
 import { motion } from 'motion/react';
 import { Clock, Linkedin, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { type FormEvent, useState } from 'react';
 import { companyProfile } from '../companyProfile';
 import { engineeredEase, viewportOnce } from '../motion';
 
 const whatsappHref = (number: string) => `https://wa.me/${number.replace(/\D/g, '')}`;
 
 export default function ContactSection() {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setStatus('sending');
+    setStatusMessage('Sending your enquiry...');
+
+    try {
+      const response = await fetch('/contact.php', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json'
+        },
+        body: formData
+      });
+      const result = (await response.json().catch(() => null)) as { message?: string } | null;
+
+      if (!response.ok) {
+        throw new Error(result?.message || 'Message could not be sent.');
+      }
+
+      form.reset();
+      setStatus('success');
+      setStatusMessage(result?.message || 'Thank you. Your enquiry has been sent to our team.');
+    } catch (error) {
+      setStatus('error');
+      setStatusMessage(
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong. Please call or WhatsApp us directly.'
+      );
+    }
+  };
+
   return (
     <section id="contact" className="bg-[#F4F6FA] py-20 md:py-32">
       <div className="mx-auto max-w-[1280px] px-5 sm:px-6">
@@ -23,20 +62,38 @@ export default function ContactSection() {
               across Zimbabwe.
             </p>
 
-            <form className="space-y-5 md:space-y-6">
+            <form className="space-y-5 md:space-y-6" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
               <div className="grid gap-5 sm:grid-cols-2 md:gap-6">
                 <div>
-                  <label className="mb-2 block font-medium text-[#24336A]">Full Name</label>
+                  <label htmlFor="fullName" className="mb-2 block font-medium text-[#24336A]">
+                    Full Name
+                  </label>
                   <input
+                    id="fullName"
+                    name="fullName"
                     type="text"
+                    required
                     className="min-h-12 w-full rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none"
                     placeholder="John Doe"
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block font-medium text-[#24336A]">Email</label>
+                  <label htmlFor="email" className="mb-2 block font-medium text-[#24336A]">
+                    Email
+                  </label>
                   <input
+                    id="email"
+                    name="email"
                     type="email"
+                    required
                     className="min-h-12 w-full rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none"
                     placeholder="john@example.com"
                   />
@@ -44,8 +101,12 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="mb-2 block font-medium text-[#24336A]">Phone</label>
+                <label htmlFor="phone" className="mb-2 block font-medium text-[#24336A]">
+                  Phone
+                </label>
                 <input
+                  id="phone"
+                  name="phone"
                   type="tel"
                   className="min-h-12 w-full rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none"
                   placeholder="+263 7xx xxx xxx"
@@ -53,9 +114,19 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="mb-2 block font-medium text-[#24336A]">Service Required</label>
-                <select className="min-h-12 w-full rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none">
-                  <option>Select a service...</option>
+                <label htmlFor="service" className="mb-2 block font-medium text-[#24336A]">
+                  Service Required
+                </label>
+                <select
+                  id="service"
+                  name="service"
+                  required
+                  defaultValue=""
+                  className="min-h-12 w-full rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none"
+                >
+                  <option value="" disabled>
+                    Select a service...
+                  </option>
                   {companyProfile.specialities.map((service) => (
                     <option key={service}>{service}</option>
                   ))}
@@ -64,19 +135,41 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="mb-2 block font-medium text-[#24336A]">Message</label>
+                <label htmlFor="message" className="mb-2 block font-medium text-[#24336A]">
+                  Message
+                </label>
                 <textarea
+                  id="message"
+                  name="message"
                   rows={5}
+                  required
                   className="w-full resize-none rounded-lg border border-[#e5e7eb] bg-white px-5 py-4 text-base transition-all duration-300 focus:border-[#8DBF44] focus:shadow-[0_0_0_3px_rgba(141,191,68,0.2)] focus:outline-none"
                   placeholder="Tell us about your project..."
                 />
               </div>
 
+              {statusMessage && (
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className={`rounded-xl border px-4 py-3 text-sm leading-6 ${
+                    status === 'success'
+                      ? 'border-[#8DBF44]/30 bg-[#8DBF44]/10 text-[#24336A]'
+                      : status === 'error'
+                        ? 'border-red-200 bg-red-50 text-red-700'
+                        : 'border-[#24336A]/10 bg-white text-[#6B7280]'
+                  }`}
+                >
+                  {statusMessage}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="tap-press min-h-12 w-full rounded-lg bg-[#8DBF44] px-8 py-4 font-semibold text-[#24336A] transition-all duration-300 hover:scale-[1.015] hover:shadow-[0_12px_34px_rgba(141,191,68,0.32)]"
+                disabled={status === 'sending'}
+                className="tap-press min-h-12 w-full rounded-lg bg-[#8DBF44] px-8 py-4 font-semibold text-[#24336A] transition-all duration-300 hover:scale-[1.015] hover:shadow-[0_12px_34px_rgba(141,191,68,0.32)] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
               >
-                {'Send Enquiry ->'}
+                {status === 'sending' ? 'Sending...' : 'Send Enquiry ->'}
               </button>
             </form>
           </motion.div>

@@ -30,6 +30,14 @@ export const companyProfile = {
     'Harare'
   ],
   laboratoryAddress: ['Stand No. 534', 'South Road', 'Norton'],
+  location: {
+    label: 'GSL Norton Laboratory',
+    area: 'South Road, Norton',
+    mapSearch: '534 South Rd, Norton', 
+    googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=534%20South%20Rd%2C%20Norton%2C%20Zimbabwe',
+    googleMapsEmbedUrl:
+      'https://www.google.com/maps?q=534%20South%20Rd%2C%20Norton%2C%20Zimbabwe&output=embed'
+  },
   postalAddress: ['P.O. Box 1116', 'Kopje', 'Harare'],
   vision:
     'To be a consistent and most preferred provider of soil testing laboratory services in Zimbabwe and beyond.',
@@ -123,3 +131,4 @@ export const companyProfile = {
 };
 
 export const operatingYears = new Date().getFullYear() - companyProfile.foundedYear;
+

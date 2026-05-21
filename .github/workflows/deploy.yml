@@ -12,8 +12,15 @@ concurrency:
 
 jobs:
   deploy:
-    name: Build and upload production site
+    name: Build and deploy via cPanel API
     runs-on: ubuntu-latest
+
+    env:
+      CPANEL_HOST: ${{ secrets.CPANEL_HOST || vars.CPANEL_HOST }}
+      CPANEL_USERNAME: ${{ secrets.CPANEL_USERNAME || vars.CPANEL_USERNAME }}
+      CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
+      CPANEL_TARGET_DIR: ${{ secrets.CPANEL_TARGET_DIR || vars.CPANEL_TARGET_DIR || 'public_html' }}
+      DEPLOY_ARCHIVE: __gsl_deploy.zip
 
     steps:
       - name: Checkout repository
@@ -31,15 +38,10 @@ jobs:
       - name: Build production site
         run: npm run build
 
-      - name: Validate FTP deployment settings
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER || vars.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME || vars.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD || vars.FTP_PASSWORD }}
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR || vars.FTP_SERVER_DIR }}
+      - name: Validate cPanel deployment settings
         run: |
           missing=0
-          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR; do
+          for name in CPANEL_HOST CPANEL_USERNAME CPANEL_TOKEN CPANEL_TARGET_DIR; do
             if [ -z "${!name}" ]; then
               echo "::error::$name is missing. Add it in GitHub Settings → Secrets and variables → Actions."
               missing=1
@@ -49,32 +51,67 @@ jobs:
           done
           exit "$missing"
 
-      - name: Normalize FTP target folder
-        env:
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR || vars.FTP_SERVER_DIR }}
+      - name: Create deployment archive
         run: |
-          target_dir="$FTP_SERVER_DIR"
-          if [ -z "$target_dir" ]; then
-            target_dir="/"
-          fi
-          case "$target_dir" in
-            */) ;;
-            *) target_dir="$target_dir/" ;;
-          esac
-          echo "FTP_TARGET_DIR=$target_dir" >> "$GITHUB_ENV"
-          echo "Deploying to FTP folder: $target_dir"
+          rm -f "$DEPLOY_ARCHIVE"
+          cd dist
+          zip -r "../$DEPLOY_ARCHIVE" .
+          cd ..
+          ls -lh "$DEPLOY_ARCHIVE"
 
-      - name: Upload dist to cPanel public_html
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER || vars.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME || vars.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD || vars.FTP_PASSWORD }}
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR || vars.FTP_SERVER_DIR }}
-        with:
-          server: ${{ env.FTP_SERVER }}
-          username: ${{ env.FTP_USERNAME }}
-          password: ${{ env.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ${{ env.FTP_TARGET_DIR }}
-          dangerous-clean-slate: false
+      - name: Upload archive through cPanel API
+        run: |
+          curl -k -sS --fail \
+            -H "Authorization: cpanel ${CPANEL_USERNAME}:${CPANEL_TOKEN}" \
+            -F "dir=${CPANEL_TARGET_DIR}" \
+            -F "file-1=@${DEPLOY_ARCHIVE}" \
+            "https://${CPANEL_HOST}:2083/execute/Fileman/upload_files" \
+            -o upload-response.json
+
+          node - <<'NODE'
+          const fs = require('fs');
+          const response = JSON.parse(fs.readFileSync('upload-response.json', 'utf8'));
+          console.log(JSON.stringify(response, null, 2));
+          if (!response.result || response.result.status !== 1) {
+            throw new Error('cPanel upload failed');
+          }
+          NODE
+
+      - name: Extract archive into public website folder
+        run: |
+          curl -k -sS --fail -G \
+            -H "Authorization: cpanel ${CPANEL_USERNAME}:${CPANEL_TOKEN}" \
+            "https://${CPANEL_HOST}:2083/json-api/cpanel" \
+            --data-urlencode "cpanel_jsonapi_user=${CPANEL_USERNAME}" \
+            --data-urlencode "cpanel_jsonapi_apiversion=2" \
+            --data-urlencode "cpanel_jsonapi_module=Fileman" \
+            --data-urlencode "cpanel_jsonapi_func=fileop" \
+            --data-urlencode "op=extract" \
+            --data-urlencode "sourcefiles=${CPANEL_TARGET_DIR}/${DEPLOY_ARCHIVE}" \
+            --data-urlencode "destfiles=${CPANEL_TARGET_DIR}" \
+            --data-urlencode "doubledecode=1" \
+            -o extract-response.json
+
+          node - <<'NODE'
+          const fs = require('fs');
+          const response = JSON.parse(fs.readFileSync('extract-response.json', 'utf8'));
+          console.log(JSON.stringify(response, null, 2));
+          if (!response.cpanelresult || response.cpanelresult.event?.result !== 1) {
+            throw new Error('cPanel archive extraction failed');
+          }
+          NODE
+
+      - name: Remove deployment archive from server
+        if: always()
+        run: |
+          curl -k -sS -G \
+            -H "Authorization: cpanel ${CPANEL_USERNAME}:${CPANEL_TOKEN}" \
+            "https://${CPANEL_HOST}:2083/json-api/cpanel" \
+            --data-urlencode "cpanel_jsonapi_user=${CPANEL_USERNAME}" \
+            --data-urlencode "cpanel_jsonapi_apiversion=2" \
+            --data-urlencode "cpanel_jsonapi_module=Fileman" \
+            --data-urlencode "cpanel_jsonapi_func=fileop" \
+            --data-urlencode "op=trash" \
+            --data-urlencode "sourcefiles=${CPANEL_TARGET_DIR}/${DEPLOY_ARCHIVE}" \
+            --data-urlencode "doubledecode=1" \
+            -o cleanup-response.json || true

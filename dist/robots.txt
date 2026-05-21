@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://www.geosciencelab.co.zw/sitemap.xml
